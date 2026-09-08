@@ -11,6 +11,43 @@
 
 <body>
 
+    <!-- Background Video Element -->
+<div class="video-bg">
+    <!-- autoplay: apne aap chalega | loop: khatam hoke fir shuru hoga | muted: aawaz band rahegi -->
+    <video autoplay loop muted playsinline>
+        <source src="background.mp4" type="video/mp4">
+        Aapka browser video support nahi karta.
+    </video>
+</div>
+
+<!-- Background Video ki CSS (Ise aap <head> tag ke andar ya apni CSS file me daal sakte hain) -->
+<style>
+    .video-bg {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: -100; /* Isse video saare text aur buttons ke piche chali jayegi */
+        background-size: cover;
+        overflow: hidden;
+    }
+    .video-bg video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: cover; /* Video stretch nahi hogi, perfectly fit ho jayegi */
+    }
+</style>
+
+
     <div class="login-box">
 
         <h1>Secure PDF Library</h1>
@@ -41,6 +78,45 @@
     </div>
 
     <script src="js/script.js"></script>
+
+    <audio id="bg-player" loop></audio>
+
+<script>
+    const mySong = ".mp3"; // Apne gane ka naam yahan likhein
+    const player = document.getElementById('bg-player');
+    player.volume = 0.25; // 45% Volume
+
+    // Gana load karne aur sahi time se shuru karne ka function
+    function playMusic() {
+        player.src = mySong;
+
+        // Agar pichle page ka time save hai, toh gana wahi se shuru hoga
+        const savedTime = localStorage.getItem('bgTrackTime');
+        if (savedTime) {
+            player.currentTime = parseFloat(savedTime);
+        }
+
+        player.play().catch(err => console.log("Autoplay blocked. Click anywhere to play."));
+    }
+
+    // Har 1 second me gana kitna baja hai, wo save hota rahega
+    player.addEventListener('timeupdate', () => {
+        localStorage.setItem('bgTrackTime', player.currentTime);
+    });
+
+    // Jaise hi user page par kahin bhi click karega, music wahi se continue ho jayega
+    window.addEventListener('click', () => {
+        if (player.paused) {
+            playMusic();
+        }
+    }, { once: true });
+
+    // Agar gana pehle se chal raha tha (pichle page par), toh automatic play karne ki koshish karein
+    window.addEventListener('load', () => {
+        playMusic();
+    });
+</script>
+
 
 </body>
 </html>
