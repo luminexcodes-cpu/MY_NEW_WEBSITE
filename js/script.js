@@ -7,7 +7,7 @@ loginForm.addEventListener("submit", function (event) {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    if (username === "gulu" && password === "5152") {
+    if (username === "Gulu" && password === "5152") {
         window.location.href = "library.html";
     } else {
         message.textContent = "Invalid username or password.";
