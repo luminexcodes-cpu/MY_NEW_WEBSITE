@@ -1,0 +1,265 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: white;
+}
+
+/* LOGIN */
+
+.login-box {
+    width: 420px;
+    padding: 40px;
+
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+
+    text-align: center;
+
+    backdrop-filter: blur(15px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+.login-box h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.login-box p {
+    color: #cbd5e1;
+    margin-bottom: 25px;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 15px;
+
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+
+    outline: none;
+    font-size: 15px;
+}
+
+.login-box input::placeholder {
+    color: #94a3b8;
+}
+
+.login-box input:focus {
+    border-color: #60a5fa;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 14px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #2563eb;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.login-box button:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+#message {
+    margin-top: 15px;
+    color: #f87171;
+}
+
+/* MOBILE */
+
+@media (max-width: 500px) {
+    .login-box {
+        width: 90%;
+        padding: 30px;
+    }
+
+    .login-box h1 {
+        font-size: 26px;
+    }
+}
+
+/* ================= LIBRARY PAGE ================= */
+
+.library-page {
+    width: 100%;
+    min-height: 100vh;
+    padding: 35px 5%;
+}
+
+.library-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.library-header h1 {
+    font-size: 38px;
+    margin-bottom: 8px;
+}
+
+.library-header p {
+    color: #94a3b8;
+    font-size: 16px;
+}
+
+.logout-btn {
+    padding: 11px 22px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 9px;
+    background: rgba(255,255,255,0.08);
+    color: white;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+/* SECTION TITLE */
+
+.section-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.section-title h2 {
+    font-size: 23px;
+}
+
+.section-title span {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+/* PDF GRID */
+
+.pdf-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.pdf-card {
+    min-height: 150px;
+    padding: 24px;
+
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.pdf-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.11);
+    border-color: rgba(96,165,250,0.6);
+}
+
+.pdf-icon {
+    width: 58px;
+    height: 68px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
+    background: #dc2626;
+
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.pdf-info {
+    flex: 1;
+}
+
+.pdf-info h3 {
+    font-size: 17px;
+    margin-bottom: 7px;
+}
+
+.pdf-info p {
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+.arrow {
+    font-size: 24px;
+    color: #94a3b8;
+}
+
+/* FOOTER */
+
+footer {
+    margin-top: 60px;
+    padding: 20px 0;
+    color: #64748b;
+    text-align: center;
+    font-size: 13px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+    .pdf-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+
+    .library-page {
+        padding: 25px 18px;
+    }
+
+    .library-header h1 {
+        font-size: 28px;
+    }
+
+    .pdf-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .library-header {
+        align-items: flex-start;
+    }
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PDF Library</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="library-page">
+
+        <!-- HEADER -->
+        <header class="library-header">
+
+            <div>
+                <h1>My PDF Library</h1>
+                <p>Read your documents online and important note iske nadar jo &  amp  ; kahi bhi dikhe to mat likhna</p>
+            </div>
+
+            <button class="logout-btn" onclick="logout()">
+                Logout
+            </button>
+
+        </header>
+
+
+        <!-- PDF SECTION -->
+        <main>
+
+            <div class="section-title">
+                <h2>Available Documents</h2>
+                <span>7 Documents</span>
+            </div>
+
+
+            <div class="pdf-grid">
+
+                <div class="pdf-card" onclick="openPDF('pdfs/GSEB_Class_10_Chapter_1_Section_B.pdf')">
+                    <div class="pdf-icon">PDF</div>
+                    <div class="pdf-info">
+                        <h3>SECTION-B CH-1</h3>
+                        <p>Click to read</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </div>
+
+
+                <div class="pdf-card" onclick="openPDF('pdfs/GSEB_Class_10_Chapter_2_Section_B.pdf')">
+                    <div class="pdf-icon">PDF</div>
+                    <div class="pdf-info">
+                        <h3>SECTION-B CH-2</h3>
+                        <p>Click to read</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </div>
+
+
+                <div class="pdf-card" onclick="openPDF('pdfs/GSEB_Class_10_Chapter_3_Section_B.pdf')">
+                    <div class="pdf-icon">PDF</div>
+                    <div class="pdf-info">
+                        <h3>SECTION-B CH-3</h3>
+                        <p>Click to read</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </div>
+
+
+                <div class="pdf-card" onclick="openPDF('pdfs/GSEB_Class_10_Chapter_4_Section_B.pdf')">
+                    <div class="pdf-icon">PDF</div>
+                    <div class="pdf-info">
+                        <h3>SECTION-B CH-4</h3>
+                        <p>Click to read</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </div>
+
+
+                <div class="pdf-card" onclick="openPDF('pdfs/GSEB_Class_10_Chapter_5_Section_B.pdf')">
+                    <div class="pdf-icon">PDF</div>
+                    <div class="pdf-info">
+                        <h3>SECTION-B CH-5</h3>
+                        <p>Click to read</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </div>
+
+
+                <div class="pdf-card" onclick="openPDF('pdfs/GSEB_Class_10_Chapter_6_Section_B.pdf')">
+                    <div class="pdf-icon">PDF</div>
+                    <div class="pdf-info">
+                        <h3>SECTION-B CH-6</h3>
+                        <p>Click to read</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </div>
+
+
+                <div class="pdf-card" onclick="openPDF('pdfs/GSEB_Class_10_Chapter_7_Section_B.pdf')">
+                    <div class="pdf-icon">PDF</div>
+                    <div class="pdf-info">
+                        <h3>SECTION-B CH-7</h3>
+                        <p>Click to read</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </div>
+
+                <div class="pdf-card" onclick="openPDF('pdfs/GSEB_Class_10_Chapter_7_Section_B.pdf')">
+                    <div class="pdf-icon">PDF</div>
+                    <div class="pdf-info">
+                        <h3>SECTION-B CH-8</h3>
+                        <p>Click to read</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </div>
+
+                <div class="pdf-card" onclick="openPDF('pdfs/GSEB_Class_10_Chapter_7_Section_B.pdf')">
+                    <div class="pdf-icon">PDF</div>
+                    <div class="pdf-info">
+                        <h3>SECTION-B CH-9</h3>
+                        <p>Click to read</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </div>
+
+                <div class="pdf-card" onclick="openPDF('pdfs/GSEB_Class_10_Chapter_7_Section_B.pdf')">
+                    <div class="pdf-icon">PDF</div>
+                    <div class="pdf-info">
+                        <h3>SECTION-B CH-10</h3>
+                        <p>Click to read</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </div>
+
+                <div class="pdf-card" onclick="openPDF('pdfs/GSEB_Class_10_Chapter_7_Section_B.pdf')">
+                    <div class="pdf-icon">PDF</div>
+                    <div class="pdf-info">
+                        <h3>SECTION-B CH-11</h3>
+                        <p>Click to read</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </div>
+
+            </div>
+
+        </main>
+
+
+        <!-- FOOTER -->
+        <footer>
+            Secure PDF Library • Online Reading
+        </footer>
+
+    </div>
+
+
+    <script>
+        function openPDF(file) {
+            window.location.href =
+                "viewer.html?file=" + encodeURIComponent(file);
+        }
+
+        function logout() {
+            window.location.href = "index.html";
+        }
+    </script>
+
+</body>
+</html>
