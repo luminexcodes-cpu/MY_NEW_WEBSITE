@@ -1,13 +1,11 @@
-// js/bg-music.js
-
-// 1. Audio Element ko dynamically HTML me add karna (taaki har page pe code na likhna pade)
+// 1. Audio Element ko dynamically HTML me add karna
 const player = document.createElement('audio');
 player.id = "bg-player";
 player.preload = "auto";
 document.body.appendChild(player);
 
 const mySong = "hh.mp3";
-player.volume = 0.45; // 45% Volume
+player.volume = 0.45; // 45% Volume (40-50% ke beech)
 
 function playMusic() {
     if (!player.src || !player.src.includes(mySong)) {
@@ -16,7 +14,7 @@ function playMusic() {
         const savedTime = localStorage.getItem("bgTrackTime");
         const isWaiting = localStorage.getItem("bgTrackWaiting");
 
-        // Agar gaana abhi 10 min wale break me hai, toh play nahi hoga
+        // Agar gaana abhi 5 min wale break me hai, toh play nahi hoga
         if (isWaiting === "true") {
             return; 
         }
@@ -32,8 +30,9 @@ function playMusic() {
         }
     }
 
-    player.play().catch(() => {
-        console.log("Browser autoplay blocked. Click to play music.");
+    // Gaana play karne ki koshish
+    player.play().catch((error) => {
+        console.log("Autoplay blocked. User action needed to play.");
     });
 }
 
@@ -42,32 +41,37 @@ player.addEventListener("timeupdate", function () {
     localStorage.setItem("bgTrackTime", player.currentTime);
 });
 
-// Gaana khatam hone par 10 minute ka wait karega
+// 🌟 GAANA KHATAM HONE PAR AB 5 MINUTE KA WAIT KAREGA
 player.addEventListener("ended", function() {
-    console.log("Gaana khatam! Ab 10 minute ka break...");
+    console.log("Gaana khatam! Ab 5 minute ka break...");
     
     localStorage.removeItem("bgTrackTime"); 
     localStorage.setItem("bgTrackWaiting", "true"); // Break status save kiya
     
+    // 5 minute = 5 * 60 * 1000 = 300,000 milliseconds
     setTimeout(function() {
-        console.log("10 minute poore hue! Gaana fir se shuru ho raha hai.");
+        console.log("5 minute poore hue! Gaana fir se shuru ho raha hai.");
         localStorage.removeItem("bgTrackWaiting");
         player.currentTime = 0;
         playMusic();
-    }, 600000); // 10 minute
+    }, 300000); 
 });
 
 // Page load hote hi music start karne ki koshish karein
 window.addEventListener("DOMContentLoaded", () => {
-    // Check karein ki pichle page se 10 min break toh nahi chal raha
     if (localStorage.getItem("bgTrackWaiting") !== "true") {
         playMusic();
     }
 });
 
-// Browser block bypass karne ke liye click handle
-window.addEventListener("click", function () {
-    if (player.paused && localStorage.getItem("bgTrackWaiting") !== "true") {
-        playMusic();
-    }
-}, { once: true });
+// 🔥 BROWSERS KI BLOCKING DOOR KARNE KE LIYE (CLICK, SCROLL YA TOUCH PAR MUSIC CHALU)
+const startInteractions = ["click", "scroll", "touchstart", "keydown"];
+startInteractions.forEach(event => {
+    window.addEventListener(event, function handleInteraction() {
+        if (player.paused && localStorage.getItem("bgTrackWaiting") !== "true") {
+            playMusic();
+        }
+        // Ek baar chalne ke baad is listener ko hata dete hain taaki baar-baar load na pade
+        window.removeEventListener(event, handleInteraction);
+    });
+});
