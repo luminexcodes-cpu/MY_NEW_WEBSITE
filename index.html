@@ -407,100 +407,39 @@
 
 
 
-<!-- ======================================
-     MUSIC
-====================================== -->
+    <!-- ======================================
+         PASSWORD SHOW/HIDE (Ise rehne dein)
+    ====================================== -->
+    <script>
+    function togglePassword() {
+        const password = document.getElementById("password");
+        const button = document.querySelector(".show-password");
 
-<audio
-    id="bg-player"
-    src="hh.mp3"
-    preload="auto"
-></audio>
-
-<!-- ======================================
-     PASSWORD SHOW/HIDE
-====================================== -->
-<script>
-function togglePassword() {
-    const password = document.getElementById("password");
-    const button = document.querySelector(".show-password");
-
-    if (password.type === "password") {
-        password.type = "text";
-        button.textContent = "🙈";
-    } else {
-        password.type = "password";
-        button.textContent = "👁";
-    }
-}
-</script>
-
-<!-- ======================================
-     LOGIN JS
-====================================== -->
-<script src="js/script.js"></script>
-
-<!-- ======================================
-     BACKGROUND MUSIC (WITH 10-MIN LOOP)
-====================================== -->
-<script>
-const mySong = "hh.mp3";
-const player = document.getElementById("bg-player");
-
-// Volume ko 45% par set kiya hai (40-50% ke beech)
-player.volume = 0.45; 
-
-function playMusic() {
-    if (!player.src || !player.src.includes(mySong)) {
-        player.src = mySong;
-
-        const savedTime = localStorage.getItem("bgTrackTime");
-        if (savedTime) {
-            player.addEventListener("loadedmetadata", function () {
-                try {
-                    player.currentTime = parseFloat(savedTime);
-                } catch (error) {
-                    console.log("Could not restore music time.");
-                }
-            }, { once: true });
+        if (password.type === "password") {
+            password.type = "text";
+            button.textContent = "🙈";
+        } else {
+            password.type = "password";
+            button.textContent = "👁";
         }
     }
+    </script>
 
-    player.play().catch(() => {
-        console.log("Browser autoplay blocked. Click to play music.");
-    });
-}
-
-// Har second current play time ko save karne ke liye
-player.addEventListener("timeupdate", function () {
-    localStorage.setItem("bgTrackTime", player.currentTime);
-});
-
-// 🌟 NEW LOGIC: Gaana khatam hone par 10 minute ka wait karega aur fir chalu hoga
-player.addEventListener("ended", function() {
-    console.log("Gaana khatam! Ab 10 minute ka break...");
-    
-    // LocalStorage se purana time hta rahe hain taaki naya loop shuruat se chale
-    localStorage.removeItem("bgTrackTime"); 
-    
-    // 10 minute = 600,000 milliseconds
-    setTimeout(function() {
-        console.log("10 minute poore hue! Gaana fir se shuru ho raha hai.");
-        player.currentTime = 0;
-        playMusic();
-    }, 300000); 
-});
-
-window.addEventListener("load", playMusic);
-
-window.addEventListener("click", function () {
-    if (player.paused) {
-        playMusic();
-    }
-}, { once: true });
-</script>
+    <!-- ======================================
+         LOGIN JS (Ise bhi rehne dein)
+    ====================================== -->
+    <script src="js/script.js"></script>
 
 
+    <!-- 🌟 PURANA BACKGROUND MUSIC WALA HTML AUR SCRIPT HATA KAR 
+         KHALI YEH EK LINE DAAL DEIN -->
+    <!-- ======================================
+         BACKGROUND MUSIC (ALL PAGES)
+    ====================================== -->
+    <script src="js/bg-music.js"></script>
+
+</body>
+</html>
 
 </body>
 
