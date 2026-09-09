@@ -1,8 +1,12 @@
-/* =========================================
+/* =========================================================
    GULU SECURE PDF LIBRARY
-   PROFESSIONAL LOGIN PAGE
-========================================= */
+   FINAL PROFESSIONAL CSS
+========================================================= */
 
+
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
 
 * {
     margin: 0;
@@ -10,148 +14,104 @@
     box-sizing: border-box;
 }
 
-
 html,
 body {
     width: 100%;
     min-height: 100%;
 }
 
-
 body {
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+    font-family: Arial, Helvetica, sans-serif;
     background: #050b14;
-
     color: #ffffff;
-
     overflow-x: hidden;
 }
 
 
-/* =========================================
+/* =========================================================
    BACKGROUND VIDEO
-========================================= */
+========================================================= */
 
 .video-bg {
-
     position: fixed;
-
     inset: 0;
-
     width: 100%;
     height: 100%;
-
     overflow: hidden;
-
     z-index: -2;
 }
 
-
 .video-bg video {
-
     width: 100%;
     height: 100%;
-
     object-fit: cover;
-
     object-position: center;
 }
 
-
-/* DARK OVERLAY */
-
 .video-overlay {
-
     position: fixed;
-
     inset: 0;
 
     background:
         linear-gradient(
             90deg,
-            rgba(2, 7, 15, 0.88),
-            rgba(4, 12, 25, 0.63),
-            rgba(2, 7, 15, 0.76)
+            rgba(2, 7, 15, 0.90),
+            rgba(4, 12, 25, 0.66),
+            rgba(2, 7, 15, 0.82)
         );
 
-    backdrop-filter:
-        blur(1.5px);
-
+    backdrop-filter: blur(1.5px);
     z-index: -1;
 }
 
 
-/* =========================================
-   PAGE
-========================================= */
+/* =========================================================
+   LOGIN PAGE
+========================================================= */
 
 .page {
-
     width: 100%;
     min-height: 100vh;
 
     display: flex;
     flex-direction: column;
 
-    padding:
-        28px
-        5%
-        18px;
+    padding: 28px 5% 18px;
 }
 
 
-/* =========================================
+/* =========================================================
    TOP BAR
-========================================= */
+========================================================= */
 
 .topbar {
-
     width: 100%;
 
     display: flex;
-
     justify-content: space-between;
     align-items: flex-start;
 
     gap: 20px;
 }
 
-
-/* BRAND */
-
 .brand-logo {
-
     display: flex;
     align-items: center;
-
     gap: 5px;
 }
 
-
 .crown {
-
     color: #1683ff;
-
     font-size: 38px;
-
     line-height: 1;
 
     text-shadow:
         0 0 15px rgba(22, 131, 255, 0.75);
 }
 
-
 .gulu-text {
-
     font-size: 43px;
-
     font-weight: 700;
-
     font-style: italic;
 
     color: #1590ff;
@@ -162,49 +122,38 @@ body {
         0 0 18px rgba(21, 144, 255, 0.55);
 }
 
-
 .brand-subtitle {
-
     margin-left: 43px;
-
     margin-top: -4px;
 
     color: #c6cfdb;
 
     font-size: 13px;
-
     letter-spacing: 2px;
 }
 
-
 .top-right {
-
     padding-top: 8px;
 
     color: #9eacbe;
 
     font-size: 11px;
-
     letter-spacing: 4px;
 
     text-align: right;
 }
 
-
 .top-right span {
-
     color: #198bff;
-
     padding: 0 8px;
 }
 
 
-/* =========================================
+/* =========================================================
    HERO
-========================================= */
+========================================================= */
 
 .hero {
-
     flex: 1;
 
     width: 100%;
@@ -220,119 +169,85 @@ body {
 
     gap: 45px;
 
-    padding:
-        35px 0
-        40px;
+    padding: 35px 0 40px;
 }
 
 
-/* =========================================
-   SIDE INFO
-========================================= */
+/* =========================================================
+   SIDE INFORMATION
+========================================================= */
 
 .side-info {
-
     max-width: 280px;
 }
 
-
 .left-info {
-
     justify-self: end;
 }
 
-
 .right-info {
-
     justify-self: start;
-
     text-align: left;
 }
 
-
-/* INFO ITEM */
-
 .info-item {
-
     display: flex;
-
     align-items: center;
 
     gap: 16px;
 
-    margin:
-        22px 0;
+    margin: 22px 0;
 }
 
-
 .info-icon {
-
     width: 48px;
     height: 48px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
     flex-shrink: 0;
 
-    border:
-        1px solid
-        rgba(69, 150, 255, 0.45);
+    border: 1px solid rgba(69, 150, 255, 0.45);
 
     border-radius: 13px;
 
-    background:
-        rgba(12, 48, 86, 0.35);
+    background: rgba(12, 48, 86, 0.35);
 
     color: #46a1ff;
 
     font-size: 21px;
 
     box-shadow:
-        0 0 20px
-        rgba(0, 121, 255, 0.08);
+        0 0 20px rgba(0, 121, 255, 0.08);
 }
 
-
 .info-item h3 {
-
     font-size: 16px;
-
     margin-bottom: 6px;
 }
 
-
 .info-item p {
-
     color: #8999ad;
-
     font-size: 12px;
-
     line-height: 1.4;
 }
 
 
-/* =========================================
-   LOGIN BOX
-========================================= */
+/* =========================================================
+   LOGIN CARD
+========================================================= */
 
 .login-box {
-
     width: 100%;
-
     max-width: 520px;
 
     justify-self: center;
 
-    padding:
-        38px
-        44px;
+    padding: 38px 44px;
 
-    border:
-        1px solid
-        rgba(71, 153, 255, 0.55);
+    border: 1px solid rgba(71, 153, 255, 0.55);
 
     border-radius: 24px;
 
@@ -343,27 +258,17 @@ body {
             rgba(5, 15, 29, 0.78)
         );
 
-    backdrop-filter:
-        blur(22px);
-
-    -webkit-backdrop-filter:
-        blur(22px);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
 
     box-shadow:
-        0 25px 70px
-        rgba(0, 0, 0, 0.55),
-
-        0 0 35px
-        rgba(0, 103, 255, 0.10);
+        0 25px 70px rgba(0, 0, 0, 0.55),
+        0 0 35px rgba(0, 103, 255, 0.10);
 
     position: relative;
 }
 
-
-/* TOP LIGHT */
-
 .login-box::before {
-
     content: "";
 
     position: absolute;
@@ -383,83 +288,65 @@ body {
         );
 
     box-shadow:
-        0 0 18px
-        #1590ff;
+        0 0 18px #1590ff;
 }
 
 
-/* =========================================
+/* =========================================================
    LOGIN LOGO
-========================================= */
+========================================================= */
 
 .login-logo {
-
     text-align: center;
-
     margin-bottom: 9px;
 }
 
-
 .logo-crown {
-
     color: #1590ff;
 
     font-size: 46px;
-
     line-height: 0.8;
 
     text-shadow:
-        0 0 20px
-        rgba(21, 144, 255, 0.7);
+        0 0 20px rgba(21, 144, 255, 0.7);
 }
 
-
 .logo-name {
-
     margin-top: 5px;
 
     color: #1590ff;
 
     font-size: 56px;
-
     line-height: 1;
 
     font-weight: 700;
-
     font-style: italic;
 
     letter-spacing: -3px;
 
     text-shadow:
-        0 0 20px
-        rgba(21, 144, 255, 0.5);
+        0 0 20px rgba(21, 144, 255, 0.5);
 }
 
 
-/* =========================================
+/* =========================================================
    LOGIN TITLE
-========================================= */
+========================================================= */
 
 .login-box h1 {
-
     text-align: center;
 
     font-size: 29px;
 
     margin-top: 20px;
-
     margin-bottom: 8px;
 }
 
-
 .login-box h1 span {
-
     color: #1590ff;
 }
 
-
 .login-subtitle {
-
     color: #aebdce;
 
     text-align: center;
@@ -470,12 +357,11 @@ body {
 }
 
 
-/* =========================================
+/* =========================================================
    INPUTS
-========================================= */
+========================================================= */
 
 .input-group {
-
     position: relative;
 
     width: 100%;
@@ -483,16 +369,11 @@ body {
     margin-bottom: 14px;
 }
 
-
 .input-group input {
-
     width: 100%;
-
     height: 54px;
 
-    padding:
-        0 50px
-        0 47px;
+    padding: 0 50px 0 47px;
 
     color: #ffffff;
 
@@ -500,52 +381,34 @@ body {
 
     outline: none;
 
-    border:
-        1px solid
-        rgba(122, 155, 192, 0.35);
+    border: 1px solid rgba(122, 155, 192, 0.35);
 
     border-radius: 12px;
 
-    background:
-        rgba(9, 24, 42, 0.65);
+    background: rgba(9, 24, 42, 0.65);
 
-    transition:
-        0.25s ease;
+    transition: 0.25s ease;
 }
 
-
 .input-group input::placeholder {
-
     color: #8999ad;
 }
 
-
 .input-group input:focus {
-
-    border-color:
-        rgba(41, 145, 255, 0.9);
+    border-color: rgba(41, 145, 255, 0.9);
 
     box-shadow:
-        0 0 0 3px
-        rgba(41, 145, 255, 0.09),
-
-        0 0 18px
-        rgba(41, 145, 255, 0.08);
+        0 0 0 3px rgba(41, 145, 255, 0.09),
+        0 0 18px rgba(41, 145, 255, 0.08);
 }
 
-
-/* INPUT ICON */
-
 .input-icon {
-
     position: absolute;
 
     left: 17px;
-
     top: 50%;
 
-    transform:
-        translateY(-50%);
+    transform: translateY(-50%);
 
     color: #62aefb;
 
@@ -554,19 +417,13 @@ body {
     z-index: 1;
 }
 
-
-/* SHOW PASSWORD */
-
 .show-password {
-
     position: absolute;
 
     right: 13px;
-
     top: 50%;
 
-    transform:
-        translateY(-50%);
+    transform: translateY(-50%);
 
     border: none;
 
@@ -579,27 +436,22 @@ body {
     font-size: 18px;
 }
 
-
 .show-password:hover {
-
     color: #45a4ff;
 }
 
 
-/* =========================================
+/* =========================================================
    LOGIN BUTTON
-========================================= */
+========================================================= */
 
 .login-button {
-
     width: 100%;
-
     height: 55px;
 
     margin-top: 5px;
 
     border: none;
-
     border-radius: 12px;
 
     background:
@@ -612,50 +464,37 @@ body {
     color: white;
 
     font-size: 17px;
-
     font-weight: 700;
 
     cursor: pointer;
 
     box-shadow:
-        0 10px 30px
-        rgba(0, 112, 255, 0.28);
+        0 10px 30px rgba(0, 112, 255, 0.28);
 
-    transition:
-        0.25s ease;
+    transition: 0.25s ease;
 }
 
-
 .login-button span {
-
     margin-right: 8px;
 }
 
-
 .login-button:hover {
-
-    transform:
-        translateY(-2px);
+    transform: translateY(-2px);
 
     box-shadow:
-        0 14px 35px
-        rgba(0, 112, 255, 0.40);
+        0 14px 35px rgba(0, 112, 255, 0.40);
 }
-
 
 .login-button:active {
-
-    transform:
-        translateY(0);
+    transform: translateY(0);
 }
 
 
-/* =========================================
+/* =========================================================
    ERROR MESSAGE
-========================================= */
+========================================================= */
 
 #message {
-
     min-height: 20px;
 
     margin-top: 13px;
@@ -668,16 +507,13 @@ body {
 }
 
 
-/* =========================================
+/* =========================================================
    SECURITY LINE
-========================================= */
+========================================================= */
 
 .security-line {
-
     display: flex;
-
     justify-content: center;
-
     align-items: center;
 
     gap: 10px;
@@ -691,19 +527,16 @@ body {
     letter-spacing: 0.5px;
 }
 
-
 .security-line span:first-child {
-
     color: #459eff;
 }
 
 
-/* =========================================
+/* =========================================================
    RIGHT QUOTE
-========================================= */
+========================================================= */
 
 .quote-mark {
-
     color: #238fff;
 
     font-family: Georgia, serif;
@@ -715,9 +548,7 @@ body {
     opacity: 0.8;
 }
 
-
 .right-info h2 {
-
     font-size: 31px;
 
     font-style: italic;
@@ -727,17 +558,12 @@ body {
     font-family: Georgia, serif;
 }
 
-
 .right-info h2 span {
-
     color: #3fa0ff;
 }
 
-
 .quote-line {
-
     width: 105px;
-
     height: 2px;
 
     margin-top: 15px;
@@ -750,31 +576,26 @@ body {
         );
 
     box-shadow:
-        0 0 10px
-        rgba(28, 143, 255, 0.5);
+        0 0 10px rgba(28, 143, 255, 0.5);
 }
 
 
-/* =========================================
-   FOOTER
-========================================= */
+/* =========================================================
+   LOGIN FOOTER
+========================================================= */
 
 .footer {
-
     width: 100%;
 
     display: flex;
 
     justify-content: center;
-
     align-items: center;
 
     gap: 17px;
 }
 
-
 .footer-line {
-
     height: 1px;
 
     width: min(180px, 14vw);
@@ -787,9 +608,7 @@ body {
         );
 }
 
-
 .footer-line:last-child {
-
     background:
         linear-gradient(
             90deg,
@@ -798,9 +617,7 @@ body {
         );
 }
 
-
 .footer-content {
-
     display: flex;
 
     align-items: center;
@@ -814,9 +631,7 @@ body {
     white-space: nowrap;
 }
 
-
 .footer-content strong {
-
     color: #2594ff;
 
     font-style: italic;
@@ -824,18 +639,424 @@ body {
     font-size: 16px;
 }
 
-
 .footer-crown {
-
     color: #168dff;
 
     font-size: 19px;
 }
 
 
-/* =========================================
-   MOBILE
-========================================= */
+/* =========================================================
+   PDF LIBRARY PAGE
+========================================================= */
+
+.library-page {
+
+    width: 100%;
+    min-height: 100vh;
+
+    padding:
+        34px
+        5%
+        25px;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(20, 100, 190, 0.10),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #07111f,
+            #0b1728,
+            #050b14
+        );
+
+    color: white;
+}
+
+
+/* =========================================================
+   LIBRARY HEADER
+========================================================= */
+
+.library-header {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 30px;
+
+    padding-bottom: 30px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,0.08);
+}
+
+.library-header h1 {
+
+    font-size: 38px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+
+    margin-bottom: 8px;
+}
+
+.library-header p {
+
+    color: #91a4bb;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.logout-btn {
+
+    padding:
+        12px 22px;
+
+    border:
+        1px solid
+        rgba(90, 160, 235, 0.35);
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,0.06);
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+.logout-btn:hover {
+
+    background:
+        rgba(37, 111, 210, 0.25);
+
+    border-color:
+        rgba(90, 160, 235, 0.75);
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.section-title {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin:
+        34px 0 22px;
+}
+
+.section-title h2 {
+
+    font-size: 22px;
+
+    color: #edf4ff;
+}
+
+.section-title span {
+
+    padding:
+        7px 12px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(50, 130, 225, 0.12);
+
+    border:
+        1px solid
+        rgba(65, 145, 235, 0.22);
+
+    color: #78b8ff;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   PDF GRID
+========================================================= */
+
+.pdf-grid {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   PDF CARD
+========================================================= */
+
+.pdf-card {
+
+    width: 100%;
+
+    min-height: 145px;
+
+    padding: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 17px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(129, 168, 211, 0.14);
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.075),
+            rgba(255,255,255,0.025)
+        );
+
+    box-shadow:
+        0 14px 35px
+        rgba(0,0,0,0.20);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+/* CARD GLOW */
+
+.pdf-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 100%;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #2995ff,
+            transparent
+        );
+
+    transition:
+        left 0.45s ease;
+}
+
+
+.pdf-card:hover {
+
+    transform:
+        translateY(-6px);
+
+    border-color:
+        rgba(68, 154, 255, 0.45);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(34, 116, 200, 0.16),
+            rgba(255,255,255,0.05)
+        );
+
+    box-shadow:
+        0 18px 42px
+        rgba(0,0,0,0.30),
+
+        0 0 25px
+        rgba(26, 125, 255, 0.08);
+}
+
+.pdf-card:hover::before {
+    left: 100%;
+}
+
+
+/* =========================================================
+   PDF ICON
+========================================================= */
+
+.pdf-icon {
+
+    width: 58px;
+    height: 68px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ef4444,
+            #b91c1c
+        );
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.5px;
+
+    box-shadow:
+        0 8px 20px
+        rgba(220,38,38,0.22);
+}
+
+
+/* =========================================================
+   PDF INFO
+========================================================= */
+
+.pdf-info {
+
+    min-width: 0;
+
+    flex: 1;
+}
+
+.pdf-info h3 {
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    color: #f1f6ff;
+
+    margin-bottom: 7px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+.pdf-info p {
+
+    color: #899bb0;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   ARROW
+========================================================= */
+
+.arrow {
+
+    flex-shrink: 0;
+
+    color: #7594b5;
+
+    font-size: 24px;
+
+    transition:
+        transform 0.25s ease,
+        color 0.25s ease;
+}
+
+.pdf-card:hover .arrow {
+
+    color: #55aaff;
+
+    transform:
+        translateX(5px);
+}
+
+
+/* =========================================================
+   LIBRARY FOOTER
+========================================================= */
+
+.library-page footer {
+
+    width: 100%;
+
+    margin-top: 45px;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,0.07);
+
+    text-align: center;
+
+    color: #61748d;
+
+    font-size: 12px;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   RESPONSIVE - LAPTOP / TABLET
+========================================================= */
 
 @media (max-width: 1050px) {
 
@@ -843,7 +1064,7 @@ body {
 
         grid-template-columns:
             1fr
-            minmax(350px, 520px)
+            minmax(360px, 520px)
             1fr;
 
         gap: 25px;
@@ -857,25 +1078,30 @@ body {
     .login-box {
 
         grid-column: 1 / -1;
-    }
-
-    .login-box {
 
         justify-self: center;
 
         max-width: 470px;
     }
+
+    .pdf-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
 }
 
 
-@media (max-width: 600px) {
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
 
     .page {
 
         padding:
-            20px
-            16px
-            15px;
+            20px 16px 15px;
     }
 
 
@@ -921,11 +1147,12 @@ body {
 
         padding:
             30px 0;
-
     }
 
 
     .login-box {
+
+        width: 100%;
 
         padding:
             30px 21px;
@@ -955,6 +1182,103 @@ body {
     .footer-line {
 
         width: 55px;
+    }
+
+
+    /* LIBRARY MOBILE */
+
+    .library-page {
+
+        padding:
+            22px 16px;
+    }
+
+
+    .library-header {
+
+        align-items: flex-start;
+    }
+
+
+    .library-header h1 {
+
+        font-size: 27px;
+    }
+
+
+    .library-header p {
+
+        font-size: 13px;
+    }
+
+
+    .logout-btn {
+
+        padding:
+            10px 15px;
+
+        font-size: 12px;
+    }
+
+
+    .section-title h2 {
+
+        font-size: 19px;
+    }
+
+
+    .section-title span {
+
+        font-size: 11px;
+    }
+
+
+    .pdf-grid {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 15px;
+    }
+
+
+    .pdf-card {
+
+        min-height: 125px;
+
+        padding: 19px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 390px) {
+
+    .library-header {
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .logout-btn {
+
+        width: 100%;
+    }
+
+    .pdf-card {
+
+        padding: 16px;
+    }
+
+    .pdf-icon {
+
+        width: 52px;
+        height: 62px;
     }
 
 }
