@@ -5,7 +5,7 @@
 const loginForm = document.getElementById("loginForm");
 const message = document.getElementById("message");
 
-const CORRECT_USERNAME = "gulubhai";
+const CORRECT_USERNAME = "Gulu";
 const CORRECT_PASSWORD = "5152";
 
 
