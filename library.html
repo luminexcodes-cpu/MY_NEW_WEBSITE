@@ -157,16 +157,20 @@
     </div>
 
 
-    <script>
-        function openPDF(file) {
-            window.location.href =
-                "viewer.html?file=" + encodeURIComponent(file);
-        }
+   <script>
 
-        function logout() {
-            window.location.href = "index.html";
-        }
-    </script>
+    protectPage();
+
+    function openPDF(file) {
+        window.location.href =
+            "viewer.html?file=" + encodeURIComponent(file);
+    }
+
+    function logout() {
+        logoutUser();
+    }
+
+</script>
 
 </body>
 </html>
