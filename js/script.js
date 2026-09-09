@@ -1,27 +1,18 @@
-// ===============================
-// SECURE PDF LIBRARY LOGIN
-// ===============================
+// ========================================
+// GULU SECURE PDF LIBRARY - LOGIN SYSTEM
+// ========================================
 
 const loginForm = document.getElementById("loginForm");
 const message = document.getElementById("message");
 
-const CORRECT_USERNAME = "Gulu";
+// Correct login details
+const CORRECT_USERNAME = "GULU";
 const CORRECT_PASSWORD = "5152";
 
 
-// --------------------------------
-// CHECK IF USER IS ALREADY LOGGED IN
-// --------------------------------
-
-if (sessionStorage.getItem("loggedIn") === "true") {
-    // User already has an active session
-    // Keep login page from being shown again
-}
-
-
-// --------------------------------
-// LOGIN SYSTEM
-// --------------------------------
+// ========================================
+// LOGIN
+// ========================================
 
 if (loginForm) {
 
@@ -36,50 +27,45 @@ if (loginForm) {
             document.getElementById("password").value;
 
 
-        // Clear old message
+        // Clear previous message
         if (message) {
             message.textContent = "";
         }
 
 
-        // Check username + password
+        // Check login details
         if (
             username === CORRECT_USERNAME &&
             password === CORRECT_PASSWORD
         ) {
 
-            // Create temporary login session
+            // Create temporary session
             sessionStorage.setItem("loggedIn", "true");
+            sessionStorage.setItem("loginTime", Date.now().toString());
 
-            // Optional: remember when session started
-            sessionStorage.setItem(
-                "loginTime",
-                Date.now().toString()
-            );
-
-            // Open PDF library
+            // Open library
             window.location.replace("library.html");
 
         } else {
 
+            // Wrong login
             if (message) {
                 message.textContent =
                     "Invalid username or password.";
             }
 
-            // Clear password field
+            // Clear password
             document.getElementById("password").value = "";
-
-            // Put cursor back into username field
-            document.getElementById("username").focus();
         }
+
     });
+
 }
 
 
-// --------------------------------
-// PREVENT DIRECT LIBRARY ACCESS
-// --------------------------------
+// ========================================
+// PROTECT LIBRARY / OTHER PAGES
+// ========================================
 
 function protectPage() {
 
@@ -93,16 +79,14 @@ function protectPage() {
 }
 
 
-// --------------------------------
+// ========================================
 // LOGOUT
-// --------------------------------
+// ========================================
 
 function logoutUser() {
 
-    // Remove session information
     sessionStorage.removeItem("loggedIn");
     sessionStorage.removeItem("loginTime");
 
-    // Return to login page
     window.location.replace("index.html");
 }
