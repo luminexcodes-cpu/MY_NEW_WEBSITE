@@ -11,8 +11,9 @@ function playMusic() {
     if (!player.src || !player.src.includes(mySong)) {
         player.src = mySong;
 
-        const savedTime = localStorage.getItem("bgTrackTime");
-        const isWaiting = localStorage.getItem("bgTrackWaiting");
+        // 🌟 localStorage ki jagah sessionStorage use kar rahe hain
+        const savedTime = sessionStorage.getItem("bgTrackTime");
+        const isWaiting = sessionStorage.getItem("bgTrackWaiting");
 
         // Agar gaana abhi 5 min wale break me hai, toh play nahi hoga
         if (isWaiting === "true") {
@@ -38,20 +39,20 @@ function playMusic() {
 
 // Har second current play time ko save karein
 player.addEventListener("timeupdate", function () {
-    localStorage.setItem("bgTrackTime", player.currentTime);
+    sessionStorage.setItem("bgTrackTime", player.currentTime);
 });
 
-// 🌟 GAANA KHATAM HONE PAR AB 5 MINUTE KA WAIT KAREGA
+// Gaana khatam hone par 5 minute ka wait karega
 player.addEventListener("ended", function() {
     console.log("Gaana khatam! Ab 5 minute ka break...");
     
-    localStorage.removeItem("bgTrackTime"); 
-    localStorage.setItem("bgTrackWaiting", "true"); // Break status save kiya
+    sessionStorage.removeItem("bgTrackTime"); 
+    sessionStorage.setItem("bgTrackWaiting", "true"); // Break status save kiya
     
-    // 5 minute = 5 * 60 * 1000 = 300,000 milliseconds
+    // 5 minute ka loop timer
     setTimeout(function() {
         console.log("5 minute poore hue! Gaana fir se shuru ho raha hai.");
-        localStorage.removeItem("bgTrackWaiting");
+        sessionStorage.removeItem("bgTrackWaiting");
         player.currentTime = 0;
         playMusic();
     }, 300000); 
@@ -59,19 +60,18 @@ player.addEventListener("ended", function() {
 
 // Page load hote hi music start karne ki koshish karein
 window.addEventListener("DOMContentLoaded", () => {
-    if (localStorage.getItem("bgTrackWaiting") !== "true") {
+    if (sessionStorage.getItem("bgTrackWaiting") !== "true") {
         playMusic();
     }
 });
 
-// 🔥 BROWSERS KI BLOCKING DOOR KARNE KE LIYE (CLICK, SCROLL YA TOUCH PAR MUSIC CHALU)
-const startInteractions = ["click", "scroll", "touchstart", "keydown"];
+// Browsers ki restriction bypass karne ke liye (Click, Scroll, Touch ya Keydown par music chalu)
+const startInteractions = ["click", "scroll", "touchstart", "keydown", "mousemove"];
 startInteractions.forEach(event => {
     window.addEventListener(event, function handleInteraction() {
-        if (player.paused && localStorage.getItem("bgTrackWaiting") !== "true") {
+        if (player.paused && sessionStorage.getItem("bgTrackWaiting") !== "true") {
             playMusic();
         }
-        // Ek baar chalne ke baad is listener ko hata dete hain taaki baar-baar load na pade
         window.removeEventListener(event, handleInteraction);
     });
 });
