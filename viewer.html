@@ -1,39 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PDF Viewer</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Gulu PDF Viewer
+    </title>
 
     <style>
-        html, body {
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+
             margin: 0;
+
             width: 100%;
             height: 100%;
+
+            background: #111827;
+
             overflow: hidden;
         }
 
-        iframe {
+
+        #pdfViewer {
+
             width: 100%;
             height: 100%;
+
             border: none;
         }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <iframe id="pdfViewer"></iframe>
 
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const file = params.get("file");
+<iframe
+    id="pdfViewer"
+    title="PDF Viewer"
+></iframe>
 
-        if (file) {
-            document.getElementById("pdfViewer").src = file;
-        }
-    </script>
+
+
+<script src="js/script.js"></script>
+
+
+<script>
+
+    // --------------------------------
+    // LOGIN PROTECTION
+    // --------------------------------
+
+    protectPage();
+
+
+    // --------------------------------
+    // GET PDF FROM URL
+    // --------------------------------
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const file =
+        params.get("file");
+
+
+    const viewer =
+        document.getElementById(
+            "pdfViewer"
+        );
+
+
+    // --------------------------------
+    // OPEN PDF
+    // --------------------------------
+
+    if (file) {
+
+        viewer.src = file;
+
+    }
+
+    else {
+
+        window.location.replace(
+            "library.html"
+        );
+
+    }
+
+</script>
+
 
 </body>
+
 </html>

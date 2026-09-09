@@ -1,17 +1,21 @@
 // ========================================
-// GULU SECURE PDF LIBRARY - LOGIN SYSTEM
+// GULU SECURE PDF LIBRARY
+// LOGIN SYSTEM
 // ========================================
 
 const loginForm = document.getElementById("loginForm");
 const message = document.getElementById("message");
 
-// Correct login details
+// ----------------------------------------
+// LOGIN DETAILS
+// ----------------------------------------
+
 const CORRECT_USERNAME = "GULU";
 const CORRECT_PASSWORD = "5152";
 
 
 // ========================================
-// LOGIN
+// LOGIN FORM
 // ========================================
 
 if (loginForm) {
@@ -33,29 +37,45 @@ if (loginForm) {
         }
 
 
-        // Check login details
+        // --------------------------------
+        // CORRECT LOGIN
+        // --------------------------------
+
         if (
             username === CORRECT_USERNAME &&
             password === CORRECT_PASSWORD
         ) {
 
-            // Create temporary session
+            // Create temporary browser session
             sessionStorage.setItem("loggedIn", "true");
-            sessionStorage.setItem("loginTime", Date.now().toString());
+
+            // Store login time
+            sessionStorage.setItem(
+                "loginTime",
+                Date.now().toString()
+            );
 
             // Open library
             window.location.replace("library.html");
 
-        } else {
+        }
 
-            // Wrong login
+        // --------------------------------
+        // WRONG LOGIN
+        // --------------------------------
+
+        else {
+
             if (message) {
                 message.textContent =
                     "Invalid username or password.";
             }
 
-            // Clear password
+            // Clear password field
             document.getElementById("password").value = "";
+
+            // Focus username
+            document.getElementById("username").focus();
         }
 
     });
@@ -64,7 +84,7 @@ if (loginForm) {
 
 
 // ========================================
-// PROTECT LIBRARY / OTHER PAGES
+// PROTECT PRIVATE PAGES
 // ========================================
 
 function protectPage() {

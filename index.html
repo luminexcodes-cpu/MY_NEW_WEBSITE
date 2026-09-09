@@ -2,409 +2,581 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="theme-color" content="#07111f">
-    <meta name="description" content="Gulu Secure PDF Library">
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#07111f"
+    >
+
+    <meta
+        name="description"
+        content="Gulu Secure PDF Library"
+    >
 
     <title>Gulu | Secure PDF Library</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
 </head>
+
 
 <body>
 
-    <!-- ================= BACKGROUND VIDEO ================= -->
 
-    <div class="video-bg">
-        <video autoplay loop muted playsinline>
-            <source src="background.mp4" type="video/mp4">
-        </video>
-    </div>
+<!-- ======================================
+     BACKGROUND VIDEO
+====================================== -->
 
-    <div class="video-overlay"></div>
+<div class="video-bg">
 
+    <video
+        autoplay
+        loop
+        muted
+        playsinline
+    >
 
-    <!-- ================= MAIN PAGE ================= -->
+        <source
+            src="background.mp4"
+            type="video/mp4"
+        >
 
-    <main class="page">
+    </video>
 
+</div>
 
-        <!-- ================= HEADER ================= -->
 
-        <header class="topbar">
+<div class="video-overlay"></div>
 
-            <div class="brand">
-                <div class="brand-logo">
-                    <span class="crown">♕</span>
-                    <span class="gulu-text">Gulu</span>
-                </div>
 
-                <div class="brand-subtitle">
-                    Secure PDF Library
-                </div>
-            </div>
 
-            <div class="top-right">
-                YOUR DOCUMENTS
-                <span>•</span>
-                YOUR CONTROL
-            </div>
+<!-- ======================================
+     MAIN PAGE
+====================================== -->
 
-        </header>
+<main class="page">
 
 
-        <!-- ================= CONTENT ================= -->
+    <!-- ==================================
+         HEADER
+    ================================== -->
 
-        <section class="hero">
+    <header class="topbar">
 
+        <div class="brand">
 
-            <!-- LEFT INFORMATION -->
+            <div class="brand-logo">
 
-            <div class="side-info left-info">
+                <span class="crown">♕</span>
 
-                <div class="info-item">
-
-                    <div class="info-icon">
-                        ✓
-                    </div>
-
-                    <div>
-                        <h3>Secure Access</h3>
-                        <p>Your documents stay protected</p>
-                    </div>
-
-                </div>
-
-
-                <div class="info-item">
-
-                    <div class="info-icon">
-                        ◫
-                    </div>
-
-                    <div>
-                        <h3>Easy Reading</h3>
-                        <p>Read your documents anytime</p>
-                    </div>
-
-                </div>
-
-
-                <div class="info-item">
-
-                    <div class="info-icon">
-                        ⚡
-                    </div>
-
-                    <div>
-                        <h3>Fast & Reliable</h3>
-                        <p>Simple and smooth experience</p>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- ================= LOGIN CARD ================= -->
-
-            <div class="login-box">
-
-
-                <!-- LOGO -->
-
-                <div class="login-logo">
-
-                    <div class="logo-crown">
-                        ♕
-                    </div>
-
-                    <div class="logo-name">
-                        Gulu
-                    </div>
-
-                </div>
-
-
-                <h1>
-                    Secure <span>PDF</span> Library
-                </h1>
-
-                <p class="login-subtitle">
-                    Login to continue
-                </p>
-
-
-                <!-- LOGIN FORM -->
-
-                <form id="loginForm">
-
-
-                    <!-- USERNAME -->
-
-                    <div class="input-group">
-
-                        <span class="input-icon">
-                            ♙
-                        </span>
-
-                        <input
-                            type="text"
-                            id="username"
-                            placeholder="Username"
-                            autocomplete="username"
-                            required
-                        >
-
-                    </div>
-
-
-                    <!-- PASSWORD -->
-
-                    <div class="input-group">
-
-                        <span class="input-icon">
-                            🔒
-                        </span>
-
-                        <input
-                            type="password"
-                            id="password"
-                            placeholder="Password"
-                            autocomplete="current-password"
-                            required
-                        >
-
-                        <button
-                            type="button"
-                            class="show-password"
-                            onclick="togglePassword()"
-                            aria-label="Show password"
-                        >
-                            👁
-                        </button>
-
-                    </div>
-
-
-                    <!-- LOGIN BUTTON -->
-
-                    <button
-                        type="submit"
-                        class="login-button"
-                    >
-                        <span>➤</span>
-                        Login
-                    </button>
-
-
-                    <!-- MESSAGE -->
-
-                    <p id="message"></p>
-
-                </form>
-
-
-                <!-- SECURITY TEXT -->
-
-                <div class="security-line">
-
-                    <span>♢ Secure</span>
-                    <span>•</span>
-                    <span>Private</span>
-                    <span>•</span>
-                    <span>Accessible</span>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- ================= RIGHT QUOTE ================= -->
-
-            <div class="side-info right-info">
-
-                <div class="quote-mark">
-                    “
-                </div>
-
-                <h2>
-                    Knowledge
-                    <br>
-                    <span>is Power</span>
-                </h2>
-
-                <div class="quote-line"></div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= FOOTER ================= -->
-
-        <footer class="footer">
-
-            <div class="footer-line"></div>
-
-            <div class="footer-content">
-
-                <span class="footer-crown">♕</span>
-
-                <span>
-                    Created by
+                <span class="gulu-text">
+                    Gulu
                 </span>
 
-                <strong>
-                    Gulshan
-                </strong>
+            </div>
+
+
+            <div class="brand-subtitle">
+                Secure PDF Library
+            </div>
+
+        </div>
+
+
+        <div class="top-right">
+
+            YOUR DOCUMENTS
+
+            <span>•</span>
+
+            YOUR CONTROL
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ==================================
+         HERO
+    ================================== -->
+
+    <section class="hero">
+
+
+        <!-- LEFT INFORMATION -->
+
+        <div class="side-info left-info">
+
+
+            <div class="info-item">
+
+                <div class="info-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <h3>
+                        Secure Access
+                    </h3>
+
+                    <p>
+                        Your documents stay protected
+                    </p>
+
+                </div>
 
             </div>
 
-            <div class="footer-line"></div>
-
-        </footer>
 
 
-    </main>
+            <div class="info-item">
+
+                <div class="info-icon">
+                    ◫
+                </div>
+
+                <div>
+
+                    <h3>
+                        Easy Reading
+                    </h3>
+
+                    <p>
+                        Read your documents anytime
+                    </p>
+
+                </div>
+
+            </div>
 
 
 
-    <!-- ================= BACKGROUND MUSIC ================= -->
+            <div class="info-item">
 
-    <audio id="bg-player" loop preload="auto"></audio>
+                <div class="info-icon">
+                    ⚡
+                </div>
+
+                <div>
+
+                    <h3>
+                        Fast & Reliable
+                    </h3>
+
+                    <p>
+                        Simple and smooth experience
+                    </p>
+
+                </div>
+
+            </div>
 
 
-    <!-- ================= PASSWORD SCRIPT ================= -->
+        </div>
 
-    <script>
 
-        function togglePassword() {
 
-            const password =
-                document.getElementById("password");
+        <!-- ==================================
+             LOGIN CARD
+        ================================== -->
 
-            const button =
-                document.querySelector(".show-password");
+        <div class="login-box">
 
-            if (password.type === "password") {
 
-                password.type = "text";
-                button.textContent = "🙈";
+            <!-- LOGO -->
 
-            } else {
+            <div class="login-logo">
 
-                password.type = "password";
-                button.textContent = "👁";
+                <div class="logo-crown">
+                    ♕
+                </div>
 
-            }
+                <div class="logo-name">
+                    Gulu
+                </div>
+
+            </div>
+
+
+
+            <h1>
+                Secure
+                <span>PDF</span>
+                Library
+            </h1>
+
+
+            <p class="login-subtitle">
+                Login to continue
+            </p>
+
+
+
+            <!-- LOGIN FORM -->
+
+            <form id="loginForm">
+
+
+                <!-- USERNAME -->
+
+                <div class="input-group">
+
+                    <span class="input-icon">
+                        ♙
+                    </span>
+
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Username"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="input-group">
+
+                    <span class="input-icon">
+                        🔒
+                    </span>
+
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword()"
+                        aria-label="Show password"
+                    >
+                        👁
+                    </button>
+
+                </div>
+
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-button"
+                >
+
+                    <span>
+                        ➤
+                    </span>
+
+                    Login
+
+                </button>
+
+
+
+                <!-- MESSAGE -->
+
+                <p id="message"></p>
+
+
+            </form>
+
+
+
+            <!-- SECURITY INFO -->
+
+            <div class="security-line">
+
+                <span>
+                    ♢ Secure
+                </span>
+
+                <span>
+                    •
+                </span>
+
+                <span>
+                    Private
+                </span>
+
+                <span>
+                    •
+                </span>
+
+                <span>
+                    Accessible
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ==================================
+             RIGHT SIDE
+        ================================== -->
+
+        <div class="side-info right-info">
+
+            <div class="quote-mark">
+                “
+            </div>
+
+
+            <h2>
+
+                Knowledge
+
+                <br>
+
+                <span>
+                    is Power
+                </span>
+
+            </h2>
+
+
+            <div class="quote-line"></div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ==================================
+         FOOTER
+    ================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-line"></div>
+
+
+        <div class="footer-content">
+
+            <span class="footer-crown">
+                ♕
+            </span>
+
+
+            <span>
+                Created by
+            </span>
+
+
+            <strong>
+                Gulshan
+            </strong>
+
+        </div>
+
+
+        <div class="footer-line"></div>
+
+    </footer>
+
+
+</main>
+
+
+
+<!-- ======================================
+     MUSIC
+====================================== -->
+
+<audio
+    id="bg-player"
+    loop
+    preload="auto"
+></audio>
+
+
+
+<!-- ======================================
+     PASSWORD SHOW/HIDE
+====================================== -->
+
+<script>
+
+function togglePassword() {
+
+    const password =
+        document.getElementById("password");
+
+    const button =
+        document.querySelector(".show-password");
+
+
+    if (password.type === "password") {
+
+        password.type = "text";
+
+        button.textContent = "🙈";
+
+    }
+
+    else {
+
+        password.type = "password";
+
+        button.textContent = "👁";
+
+    }
+
+}
+
+</script>
+
+
+
+<!-- ======================================
+     LOGIN JS
+====================================== -->
+
+<script src="js/script.js"></script>
+
+
+
+<!-- ======================================
+     BACKGROUND MUSIC
+====================================== -->
+
+<script>
+
+const mySong = "background.mp3";
+
+const player =
+    document.getElementById("bg-player");
+
+player.volume = 0.25;
+
+
+
+function playMusic() {
+
+    if (
+        !player.src ||
+        !player.src.includes(mySong)
+    ) {
+
+        player.src = mySong;
+
+
+        const savedTime =
+            localStorage.getItem("bgTrackTime");
+
+
+        if (savedTime) {
+
+            player.addEventListener(
+
+                "loadedmetadata",
+
+                function () {
+
+                    try {
+
+                        player.currentTime =
+                            parseFloat(savedTime);
+
+                    }
+
+                    catch (error) {
+
+                        console.log(
+                            "Could not restore music time."
+                        );
+
+                    }
+
+                },
+
+                { once: true }
+
+            );
+
         }
 
-    </script>
+    }
 
 
-    <!-- ================= LOGIN SCRIPT ================= -->
+    player.play().catch(() => {
 
-    <script src="js/script.js"></script>
+        console.log(
+            "Browser autoplay blocked. Click to play music."
+        );
 
+    });
 
-    <!-- ================= MUSIC SCRIPT ================= -->
-
-    <script>
-
-        const mySong = "background.mp3";
-
-        const player =
-            document.getElementById("bg-player");
-
-        player.volume = 0.25;
+}
 
 
-        function playMusic() {
 
-            if (!player.src ||
-                !player.src.includes(mySong)) {
+player.addEventListener(
+    "timeupdate",
+    function () {
 
-                player.src = mySong;
+        localStorage.setItem(
+            "bgTrackTime",
+            player.currentTime
+        );
 
-                const savedTime =
-                    localStorage.getItem("bgTrackTime");
-
-                if (savedTime) {
-
-                    player.addEventListener(
-                        "loadedmetadata",
-                        function () {
-
-                            try {
-
-                                player.currentTime =
-                                    parseFloat(savedTime);
-
-                            } catch (error) {
-
-                                console.log(
-                                    "Could not restore music time."
-                                );
-
-                            }
-
-                        },
-                        { once: true }
-                    );
-
-                }
-
-            }
+    }
+);
 
 
-            player.play().catch(() => {
 
-                console.log(
-                    "Browser blocked autoplay. Click anywhere to start music."
-                );
+window.addEventListener(
+    "load",
+    playMusic
+);
 
-            });
+
+
+window.addEventListener(
+    "click",
+    function () {
+
+        if (player.paused) {
+
+            playMusic();
 
         }
 
+    },
+    { once: true }
+);
 
-        player.addEventListener(
-            "timeupdate",
-            function () {
+</script>
 
-                localStorage.setItem(
-                    "bgTrackTime",
-                    player.currentTime
-                );
-
-            }
-        );
-
-
-        window.addEventListener(
-            "load",
-            playMusic
-        );
-
-
-        window.addEventListener(
-            "click",
-            function () {
-
-                if (player.paused) {
-                    playMusic();
-                }
-
-            },
-            { once: true }
-        );
-
-    </script>
 
 </body>
+
 </html>
