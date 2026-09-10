@@ -1,11 +1,459 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#07111f"
+    >
+
+    <title>Gulu | Subject Library</title>
+
+    <link
+        rel="stylesheet"
+        href="./css/style.css"
+    >
+
 </head>
+
+
 <body>
+
+<div class="library-page">
+
+
+    <!-- =====================================
+         HEADER
+    ====================================== -->
+
+    <header class="library-header">
+
+        <div>
+
+            <div class="library-brand">
+
+                <span class="library-crown">
+                    ♕
+                </span>
+
+                <span class="library-gulu">
+                    Gulu
+                </span>
+
+            </div>
+
+            <h1 id="subjectTitle">
+                Subject
+            </h1>
+
+            <p id="subjectSubtitle">
+                Your study documents
+            </p>
+
+        </div>
+
+
+        <button
+            class="logout-btn"
+            onclick="logout()"
+        >
+            Logout
+        </button>
+
+    </header>
+
+
+
+    <!-- =====================================
+         BACK BUTTON
+    ====================================== -->
+
+    <div style="margin-top: 25px;">
+
+        <button
+            class="logout-btn"
+            onclick="goBack()"
+        >
+            ← Back to Subjects
+        </button>
+
+    </div>
+
+
+
+    <!-- =====================================
+         DOCUMENT TITLE
+    ====================================== -->
+
+    <div class="library-top">
+
+        <div>
+
+            <h2>
+                Available Documents
+            </h2>
+
+            <p>
+                Click a document to read it online
+            </p>
+
+        </div>
+
+
+        <div class="document-count">
+
+            <strong id="pdfCount">
+                0
+            </strong>
+
+            PDFs
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================
+         PDF GRID
+    ====================================== -->
+
+    <main>
+
+        <div
+            id="pdfGrid"
+            class="pdf-grid"
+        ></div>
+
+    </main>
+
+
+
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
+
+    <footer class="library-footer">
+
+        <div>
+            Secure PDF Library
+        </div>
+
+        <div class="footer-credit">
+            Created by <strong>Gulshan</strong>
+        </div>
+
+    </footer>
+
+
+</div>
+
+
+
+<!-- =====================================
+     LOGIN / PAGE SCRIPT
+====================================== -->
+
+<script src="js/script.js"></script>
+
+
+<script>
+
+    /* =====================================
+       PROTECT PAGE
+    ===================================== */
+
+    protectPage();
+
+
+
+    /* =====================================
+       GET SUBJECT
+    ===================================== */
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const subject =
+        params.get("subject");
+
+
+
+    /* =====================================
+       PDF DATA
+       YAHAN BAAD MEIN PDFs ADD KARENGE
+    ===================================== */
+
+    const subjects = {
+
+        english: {
+            title: "English",
+            subtitle: "English notes, chapters and study material",
+            pdfs: []
+        },
+
+        maths: {
+            title: "Mathematics",
+            subtitle: "Mathematics chapters and practice material",
+            pdfs: []
+        },
+
+        science: {
+            title: "Science",
+            subtitle: "Science chapters, notes and important questions",
+            pdfs: []
+        },
+
+        "social-science": {
+            title: "Social Science",
+            subtitle: "History, Geography, Civics and Economics",
+            pdfs: [
+                {
+                    name: "SECTION-B CH-1",
+                    file: "pdfs/Science/GSEB_Class_10_Chapter_1_Section_B.pdf"
+                },
+                {
+                    name: "SECTION-B CH-2",
+                    file: "pdfs/Science/GSEB_Class_10_Chapter_2_Section_B.pdf"
+                },
+                {
+                    name: "SECTION-B CH-3",
+                    file: "pdfs/Science/GSEB_Class_10_Chapter_3_Section_B.pdf"
+                },
+                { g
+                    name: "SECTION-B CH-4",
+                    file: "pdfs/Science/GSEB_Class_10_Chapter_4_Section_B.pdf"    
+                },
+                {
+                    name: "SECTION-B CH-5",
+                    file: "pdfs/Science/GSEB_Class_10_Chapter_5_Section_B.pdf"
+                },
+                {
+                    name: "SECTION-B CH-8",
+                    file: "pdfs/Science/GSEB_Class_10_Chapter_8_Section_B.pdf"
+                },
+                {
+                    name: "SECTION-B CH-9",
+                    file: "pdfs/Science/GSEB_Class_10_Chapter_9_Section_B.pdf"
+                },
+                {
+                    name: "SECTION-B CH-10",
+                    file: "pdfs/Science/GSEB_Class_10_Chapter_10_Section_B.pdf"
+                }
+            ]
+        },
+
+        gujarati: {
+            title: "Gujarati",
+            subtitle: "Gujarati chapters, notes and study material",
+            pdfs: []
+        },
+
+        sanskrit: {
+            title: "Sanskrit",
+            subtitle: "Sanskrit chapters and study material",
+            pdfs: []
+        }
+
+    };
+
+
+
+    /* =====================================
+       CHECK SUBJECT
+    ===================================== */
+
+    if (!subject || !subjects[subject]) {
+
+        window.location.replace("library.html");
+
+    }
+
+
+
+    /* =====================================
+       LOAD SUBJECT
+    ===================================== */
+
+    const currentSubject =
+        subjects[subject];
+
+
+
+    document.getElementById(
+        "subjectTitle"
+    ).textContent =
+        currentSubject.title;
+
+
+
+    document.getElementById(
+        "subjectSubtitle"
+    ).textContent =
+        currentSubject.subtitle;
+
+
+
+    /* =====================================
+       LOAD PDFS
+    ===================================== */
+
+    const pdfGrid =
+        document.getElementById(
+            "pdfGrid"
+        );
+
+
+    const pdfCount =
+        document.getElementById(
+            "pdfCount"
+        );
+
+
+    pdfCount.textContent =
+        currentSubject.pdfs.length;
+
+
+
+    if (currentSubject.pdfs.length === 0) {
+
+        pdfGrid.innerHTML = `
+            <div
+                style="
+                    grid-column: 1 / -1;
+                    text-align: center;
+                    padding: 70px 20px;
+                    color: #7f92aa;
+                    border: 1px solid rgba(255,255,255,0.08);
+                    border-radius: 18px;
+                    background: rgba(255,255,255,0.03);
+                "
+            >
+
+                <h3
+                    style="
+                        color: #dbeafe;
+                        margin-bottom: 10px;
+                    "
+                >
+                    No PDFs yet
+                </h3>
+
+                <p>
+                    Documents for this subject will appear here.
+                </p>
+
+            </div>
+        `;
+
+    }
+
+    else {
+
+        currentSubject.pdfs.forEach(
+            function (pdf) {
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                card.className =
+                    "pdf-card";
+
+
+                card.onclick =
+                    function () {
+
+                        openPDF(pdf.file);
+
+                    };
+
+
+                card.innerHTML = `
+
+                    <div class="pdf-icon">
+                        PDF
+                    </div>
+
+                    <div class="pdf-info">
+
+                        <h3>
+                            ${pdf.name}
+                        </h3>
+
+                        <p>
+                            Click to read
+                        </p>
+
+                    </div>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                `;
+
+
+                pdfGrid.appendChild(card);
+
+            }
+        );
+
+    }
+
+
+
+    /* =====================================
+       OPEN PDF
+    ===================================== */
+
+    function openPDF(file) {
+
+        window.location.href =
+            "viewer.html?file=" +
+            encodeURIComponent(file);
+
+    }
+
+
+
+    /* =====================================
+       BACK
+    ===================================== */
+
+    function goBack() {
+
+        window.location.href =
+            "library.html";
+
+    }
+
+
+
+    /* =====================================
+       LOGOUT
+    ===================================== */
+
+    function logout() {
+
+        logoutUser();
+
+    }
+
+</script>
+
 
 </body>
 
