@@ -1637,3 +1637,207 @@ body {
     }
 
 }
+
+/* =========================================================
+   FINAL MOBILE FIX
+========================================================= */
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* ---------- LIBRARY / SUBJECT PAGES ---------- */
+
+.library-page {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* ---------- TABLET ---------- */
+
+@media (max-width: 900px) {
+
+    .subject-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        width: 100%;
+    }
+
+    .pdf-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        width: 100%;
+    }
+
+}
+
+
+/* ---------- PHONE ---------- */
+
+@media (max-width: 600px) {
+
+    .library-page {
+        width: 100%;
+        min-width: 0;
+        padding: 18px 12px 20px !important;
+    }
+
+    .library-header {
+        width: 100%;
+        min-width: 0;
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .library-header h1 {
+        font-size: 25px !important;
+        line-height: 1.2;
+    }
+
+    .library-header p {
+        font-size: 13px !important;
+    }
+
+    .logout-btn {
+        width: auto;
+        max-width: 100%;
+    }
+
+
+    /* SUBJECT AREA */
+
+    .library-top {
+        width: 100%;
+        min-width: 0;
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 12px;
+
+        margin-top: 25px !important;
+    }
+
+    .library-top h2 {
+        font-size: 20px !important;
+    }
+
+    .library-top p {
+        font-size: 12px !important;
+    }
+
+
+    /* SUBJECT CARDS */
+
+    .subject-grid {
+        width: 100% !important;
+
+        display: grid !important;
+
+        grid-template-columns: 1fr !important;
+
+        gap: 14px !important;
+    }
+
+    .subject-card {
+        width: 100% !important;
+        min-width: 0 !important;
+
+        min-height: 115px !important;
+
+        padding: 17px !important;
+
+        gap: 14px !important;
+    }
+
+    .subject-icon {
+        width: 52px !important;
+        height: 52px !important;
+
+        flex-shrink: 0;
+    }
+
+    .subject-info {
+        min-width: 0;
+    }
+
+    .subject-info h3 {
+        font-size: 17px !important;
+    }
+
+    .subject-info p {
+        font-size: 11px !important;
+    }
+
+    .subject-arrow {
+        font-size: 21px !important;
+    }
+
+
+    /* PDF CARDS */
+
+    .pdf-grid {
+        width: 100% !important;
+
+        display: grid !important;
+
+        grid-template-columns: 1fr !important;
+
+        gap: 14px !important;
+    }
+
+    .pdf-card {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+
+
+    /* FOOTER */
+
+    .library-footer {
+        width: 100%;
+
+        flex-direction: column;
+
+        gap: 8px;
+
+        text-align: center;
+    }
+
+}
+
+
+/* ---------- SMALL PHONE ---------- */
+
+@media (max-width: 400px) {
+
+    .library-page {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .library-header h1 {
+        font-size: 23px !important;
+    }
+
+    .subject-card {
+        padding: 15px !important;
+    }
+
+    .subject-icon {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 15px !important;
+    }
+
+    .subject-info h3 {
+        font-size: 16px !important;
+    }
+
+}
