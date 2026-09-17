@@ -1,14 +1,18 @@
 // ========================================
 // GULU SECURE PDF LIBRARY
-// LOGIN SYSTEM
+// LOGIN / SESSION SYSTEM
 // ========================================
 
-const loginForm = document.getElementById("loginForm");
-const message = document.getElementById("message");
+const loginForm =
+    document.getElementById("loginForm");
 
-// ----------------------------------------
+const message =
+    document.getElementById("message");
+
+
+// ========================================
 // LOGIN DETAILS
-// ----------------------------------------
+// ========================================
 
 const CORRECT_USERNAME = "GULU";
 const CORRECT_PASSWORD = "5152";
@@ -20,82 +24,117 @@ const CORRECT_PASSWORD = "5152";
 
 if (loginForm) {
 
-    loginForm.addEventListener("submit", function (event) {
+    loginForm.addEventListener(
+        "submit",
+        function (event) {
 
-        event.preventDefault();
-
-        const username =
-            document.getElementById("username").value.trim();
-
-        const password =
-            document.getElementById("password").value;
+            event.preventDefault();
 
 
-        // Clear previous message
-        if (message) {
-            message.textContent = "";
-        }
+            const username =
+                document
+                    .getElementById("username")
+                    .value
+                    .trim();
 
 
-        // --------------------------------
-        // CORRECT LOGIN
-        // --------------------------------
+            const password =
+                document
+                    .getElementById("password")
+                    .value;
 
-        if (
-            username === CORRECT_USERNAME &&
-            password === CORRECT_PASSWORD
-        ) {
-
-            // Create temporary browser session
-            sessionStorage.setItem("loggedIn", "true");
-
-            // Store login time
-            sessionStorage.setItem(
-                "loginTime",
-                Date.now().toString()
-            );
-
-            // Open library
-            window.location.replace("library.html");
-
-        }
-
-        // --------------------------------
-        // WRONG LOGIN
-        // --------------------------------
-
-        else {
 
             if (message) {
-                message.textContent =
-                    "Invalid username or password.";
+                message.textContent = "";
             }
 
-            // Clear password field
-            document.getElementById("password").value = "";
 
-            // Focus username
-            document.getElementById("username").focus();
+            if (
+                username === CORRECT_USERNAME &&
+                password === CORRECT_PASSWORD
+            ) {
+
+                // Login session
+                sessionStorage.setItem(
+                    "loggedIn",
+                    "true"
+                );
+
+
+                sessionStorage.setItem(
+                    "loginTime",
+                    Date.now().toString()
+                );
+
+
+                // Clear old selections
+                sessionStorage.removeItem(
+                    "selectedClass"
+                );
+
+                sessionStorage.removeItem(
+                    "selectedSubject"
+                );
+
+                sessionStorage.removeItem(
+                    "subjectUnlocked"
+                );
+
+
+                // Go to class selection
+                window.location.replace(
+                    "classes.html"
+                );
+
+            }
+
+            else {
+
+                if (message) {
+
+                    message.textContent =
+                        "Invalid username or password.";
+
+                }
+
+
+                document.getElementById(
+                    "password"
+                ).value = "";
+
+
+                document.getElementById(
+                    "username"
+                ).focus();
+
+            }
+
         }
-
-    });
+    );
 
 }
 
 
 // ========================================
-// PROTECT PRIVATE PAGES
+// PROTECT PAGE
 // ========================================
 
 function protectPage() {
 
     const loggedIn =
-        sessionStorage.getItem("loggedIn");
+        sessionStorage.getItem(
+            "loggedIn"
+        );
+
 
     if (loggedIn !== "true") {
 
-        window.location.replace("index.html");
+        window.location.replace(
+            "index.html"
+        );
+
     }
+
 }
 
 
@@ -105,8 +144,33 @@ function protectPage() {
 
 function logoutUser() {
 
-    sessionStorage.removeItem("loggedIn");
-    sessionStorage.removeItem("loginTime");
+    sessionStorage.removeItem(
+        "loggedIn"
+    );
 
-    window.location.replace("index.html");
+
+    sessionStorage.removeItem(
+        "loginTime"
+    );
+
+
+    sessionStorage.removeItem(
+        "selectedClass"
+    );
+
+
+    sessionStorage.removeItem(
+        "selectedSubject"
+    );
+
+
+    sessionStorage.removeItem(
+        "subjectUnlocked"
+    );
+
+
+    window.location.replace(
+        "index.html"
+    );
+
 }

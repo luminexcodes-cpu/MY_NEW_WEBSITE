@@ -24,18 +24,164 @@
         href="./css/style.css"
     >
 
+    <style>
+
+        .selected-class-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            margin-top: 10px;
+
+            padding: 7px 12px;
+
+            border-radius: 20px;
+
+            border:
+                1px solid
+                rgba(74,151,235,0.28);
+
+            background:
+                rgba(42,127,216,0.11);
+
+            color: #8cbfff;
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+
+        .selected-class-badge .dot {
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #35d18a;
+
+            box-shadow:
+                0 0 9px
+                rgba(53,209,138,0.65);
+        }
+
+
+        .library-actions {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            flex-shrink: 0;
+        }
+
+
+        .change-class-btn {
+
+            padding:
+                12px 18px;
+
+            border:
+                1px solid
+                rgba(74,151,235,0.30);
+
+            border-radius: 10px;
+
+            background:
+                rgba(255,255,255,0.045);
+
+            color: #a9c8e8;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.25s ease;
+        }
+
+
+        .change-class-btn:hover {
+
+            background:
+                rgba(37,111,210,0.18);
+
+            border-color:
+                rgba(90,160,235,0.70);
+
+            color: white;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        .library-top-class {
+
+            color: #55aaff;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.7px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 7px;
+        }
+
+
+        @media (max-width: 600px) {
+
+            .library-actions {
+
+                width: 100%;
+
+                display: grid;
+
+                grid-template-columns: 1fr 1fr;
+
+                gap: 10px;
+            }
+
+
+            .change-class-btn,
+            .logout-btn {
+
+                width: 100%;
+            }
+
+        }
+
+
+        @media (max-width: 400px) {
+
+            .library-actions {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
 </head>
 
 
 <body>
 
-
 <div class="library-page">
 
 
-    <!-- =====================================
-         HEADER
-    ====================================== -->
+    <!-- HEADER -->
 
     <header class="library-header">
 
@@ -63,31 +209,63 @@
                 Your personal study library
             </p>
 
+
+            <div class="selected-class-badge">
+
+                <span class="dot"></span>
+
+                <span id="selectedClassText">
+                    Class
+                </span>
+
+            </div>
+
         </div>
 
 
-        <button
-            class="logout-btn"
-            onclick="logout()"
-        >
-            Logout
-        </button>
+        <div class="library-actions">
+
+            <button
+                class="change-class-btn"
+                id="changeClassBtn"
+                type="button"
+            >
+                ⇄ Change Class
+            </button>
+
+
+            <button
+                class="logout-btn"
+                id="logoutBtn"
+                type="button"
+            >
+                Logout
+            </button>
+
+        </div>
 
     </header>
 
 
 
-    <!-- =====================================
-         DASHBOARD TOP
-    ====================================== -->
+    <!-- TOP -->
 
     <div class="library-top">
 
         <div>
 
+            <div
+                class="library-top-class"
+                id="classHeading"
+            >
+                CLASS
+            </div>
+
+
             <h2>
                 Study Subjects
             </h2>
+
 
             <p>
                 Select a subject to explore your documents
@@ -98,8 +276,8 @@
 
         <div class="document-count">
 
-            <strong>
-                6
+            <strong id="subjectCount">
+                0
             </strong>
 
             Subjects
@@ -110,209 +288,20 @@
 
 
 
-    <!-- =====================================
-         SUBJECT GRID
-    ====================================== -->
+    <!-- SUBJECTS -->
 
     <main>
 
-        <div class="subject-grid">
-
-
-            <!-- ENGLISH -->
-
-            <div
-                class="subject-card"
-                onclick="askSubjectPassword('english')"
-            >
-
-                <div class="subject-icon english-icon">
-                    EN
-                </div>
-
-                <div class="subject-info">
-
-                    <h3>
-                        English
-                    </h3>
-
-                    <p>
-                        Notes & Chapters
-                    </p>
-
-                </div>
-
-                <span class="subject-arrow">
-                    →
-                </span>
-
-            </div>
-
-
-
-            <!-- MATHS -->
-
-            <div
-                class="subject-card"
-                onclick="askSubjectPassword('maths')"
-            >
-
-                <div class="subject-icon maths-icon">
-                    ∑
-                </div>
-
-                <div class="subject-info">
-
-                    <h3>
-                        Mathematics
-                    </h3>
-
-                    <p>
-                        Chapters & Practice
-                    </p>
-
-                </div>
-
-                <span class="subject-arrow">
-                    →
-                </span>
-
-            </div>
-
-
-
-            <!-- SCIENCE -->
-
-            <div
-                class="subject-card"
-                onclick="askSubjectPassword('science')"
-            >
-
-                <div class="subject-icon science-icon">
-                    ⚛
-                </div>
-
-                <div class="subject-info">
-
-                    <h3>
-                        Science
-                    </h3>
-
-                    <p>
-                        Chapters & Notes
-                    </p>
-
-                </div>
-
-                <span class="subject-arrow">
-                    →
-                </span>
-
-            </div>
-
-
-
-            <!-- SOCIAL SCIENCE -->
-
-            <div
-                class="subject-card"
-                onclick="askSubjectPassword('Social-science')"
-            >
-
-                <div class="subject-icon social-icon">
-                    SS
-                </div>
-
-                <div class="subject-info">
-
-                    <h3>
-                        Social Science
-                    </h3>
-
-                    <p>
-                        History • Geography • Civics
-                    </p>
-
-                </div>
-
-                <span class="subject-arrow">
-                    →
-                </span>
-
-            </div>
-
-
-
-            <!-- GUJARATI -->
-
-            <div
-                class="subject-card"
-                onclick="askSubjectPassword('gujarati')"
-            >
-
-                <div class="subject-icon gujarati-icon">
-                    અ
-                </div>
-
-                <div class="subject-info">
-
-                    <h3>
-                        Gujarati
-                    </h3>
-
-                    <p>
-                        Chapters & Notes
-                    </p>
-
-                </div>
-
-                <span class="subject-arrow">
-                    →
-                </span>
-
-            </div>
-
-
-
-            <!-- SANSKRIT -->
-
-            <div
-                class="subject-card"
-                onclick="askSubjectPassword('sanskrit')"
-            >
-
-                <div class="subject-icon sanskrit-icon">
-                    ॐ
-                </div>
-
-                <div class="subject-info">
-
-                    <h3>
-                        Sanskrit
-                    </h3>
-
-                    <p>
-                        Chapters & Study Material
-                    </p>
-
-                </div>
-
-                <span class="subject-arrow">
-                    →
-                </span>
-
-            </div>
-
-
-        </div>
+        <div
+            class="subject-grid"
+            id="subjectGrid"
+        ></div>
 
     </main>
 
 
 
-    <!-- =====================================
-         FOOTER
-    ====================================== -->
+    <!-- FOOTER -->
 
     <footer class="library-footer">
 
@@ -331,62 +320,158 @@
 
 
 
-<!-- =====================================
-     JAVASCRIPT
-====================================== -->
+<!-- DATA -->
+
+<script src="js/library-data.js"></script>
+
+
+<!-- MAIN SCRIPT -->
 
 <script src="js/script.js"></script>
 
 
 <script>
 
-    // Logout
-    function logout() {
+    /* =====================================
+       PROTECT
+    ====================================== */
 
-        logoutUser();
+    protectPage();
+
+
+
+    /* =====================================
+       SELECTED CLASS
+    ====================================== */
+
+    const selectedClass =
+        sessionStorage.getItem(
+            "selectedClass"
+        );
+
+
+    if (
+        !selectedClass ||
+        !LIBRARY_DATA[selectedClass]
+    ) {
+
+        sessionStorage.removeItem(
+            "selectedSubject"
+        );
+
+        sessionStorage.removeItem(
+            "subjectUnlocked"
+        );
+
+        window.location.replace(
+            "classes.html"
+        );
 
     }
 
-</script>
 
-<script src="js/bg-music.js"></script>
-
-<script>
-
-    const subjectPasswords = {
-
-        "english": "priyanka mam",
-
-        "maths": "kruti mam",
-
-        "science": "kruti mam",
-
-        "Social-science": "sunita mam",
-
-        "gujarati": "purvi mam",
-
-        "sanskrit": "priyanka mam"
-
-    };
+    const currentClass =
+        LIBRARY_DATA[selectedClass];
 
 
-    function askSubjectPassword(subject) {
+
+    /* =====================================
+       CLASS DISPLAY
+    ====================================== */
+
+    document.getElementById(
+        "selectedClassText"
+    ).textContent =
+        currentClass.fullName;
+
+
+    document.getElementById(
+        "classHeading"
+    ).textContent =
+        currentClass.name;
+
+
+
+    /* =====================================
+       SUBJECT GRID
+    ====================================== */
+
+    const subjectGrid =
+        document.getElementById(
+            "subjectGrid"
+        );
+
+
+    const subjectCount =
+        document.getElementById(
+            "subjectCount"
+        );
+
+
+    const subjects =
+        Object.entries(
+            currentClass.subjects
+        );
+
+
+    subjectCount.textContent =
+        subjects.length;
+
+
+
+    /* =====================================
+       SUBJECT PASSWORD
+    ====================================== */
+
+    function askSubjectPassword(subjectKey) {
+
+        const subject =
+            currentClass.subjects[subjectKey];
+
+
+        if (!subject) {
+            return;
+        }
+
 
         const password =
-            prompt("Enter subject password:");
+            prompt(
+                "Enter subject password:"
+            );
+
 
         if (password === null) {
             return;
         }
 
 
-        if (password === subjectPasswords[subject]) {
+        if (
+            password ===
+            subject.password
+        ) {
 
-            window.location.href =
+            sessionStorage.setItem(
+                "selectedSubject",
+                subjectKey
+            );
+
+
+            sessionStorage.setItem(
+                "subjectUnlocked",
+                "true"
+            );
+
+
+            window.location.replace(
                 "subject.html?subject=" +
-                encodeURIComponent(subject);
+                encodeURIComponent(
+                    subjectKey
+                )
+            );
 
-        } else {
+        }
+
+        else {
 
             alert(
                 "Incorrect password. Access denied."
@@ -396,7 +481,236 @@
 
     }
 
+
+
+    /* =====================================
+       CREATE SUBJECT CARDS
+    ====================================== */
+
+    subjects.forEach(
+        function ([subjectKey, subject]) {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "subject-card";
+
+
+            card.setAttribute(
+                "role",
+                "button"
+            );
+
+
+            card.setAttribute(
+                "tabindex",
+                "0"
+            );
+
+
+            card.innerHTML = `
+
+                <div class="subject-icon ${getSubjectIconClass(subjectKey)}">
+                    ${getSubjectIcon(subjectKey)}
+                </div>
+
+
+                <div class="subject-info">
+
+                    <h3>
+                        ${subject.title}
+                    </h3>
+
+                    <p>
+                        ${subject.subtitle}
+                    </p>
+
+                </div>
+
+
+                <span class="subject-arrow">
+                    →
+                </span>
+
+            `;
+
+
+            card.addEventListener(
+                "click",
+                function () {
+
+                    askSubjectPassword(
+                        subjectKey
+                    );
+
+                }
+            );
+
+
+            card.addEventListener(
+                "keydown",
+                function (event) {
+
+                    if (
+                        event.key === "Enter" ||
+                        event.key === " "
+                    ) {
+
+                        event.preventDefault();
+
+                        askSubjectPassword(
+                            subjectKey
+                        );
+
+                    }
+
+                }
+            );
+
+
+            subjectGrid.appendChild(
+                card
+            );
+
+        }
+    );
+
+
+
+    /* =====================================
+       SUBJECT ICON
+    ====================================== */
+
+    function getSubjectIconClass(
+        subjectKey
+    ) {
+
+        const classes = {
+
+            english:
+                "english-icon",
+
+            maths:
+                "maths-icon",
+
+            science:
+                "science-icon",
+
+            "Social-science":
+                "social-icon",
+
+            gujarati:
+                "gujarati-icon",
+
+            sanskrit:
+                "sanskrit-icon"
+
+        };
+
+
+        return classes[subjectKey] || "";
+
+    }
+
+
+    function getSubjectIcon(
+        subjectKey
+    ) {
+
+        const icons = {
+
+            english:
+                "EN",
+
+            maths:
+                "∑",
+
+            science:
+                "⚛",
+
+            "Social-science":
+                "SS",
+
+            gujarati:
+                "અ",
+
+            sanskrit:
+                "ॐ"
+
+        };
+
+
+        return icons[subjectKey] || "?";
+
+    }
+
+
+
+    /* =====================================
+       CHANGE CLASS
+    ====================================== */
+
+    document
+        .getElementById(
+            "changeClassBtn"
+        )
+        .addEventListener(
+            "click",
+            function () {
+
+                sessionStorage.removeItem(
+                    "selectedClass"
+                );
+
+
+                sessionStorage.removeItem(
+                    "selectedSubject"
+                );
+
+
+                sessionStorage.removeItem(
+                    "subjectUnlocked"
+                );
+
+
+                window.location.replace(
+                    "classes.html"
+                );
+
+            }
+        );
+
+
+
+    /* =====================================
+       LOGOUT
+    ====================================== */
+
+    document
+        .getElementById(
+            "logoutBtn"
+        )
+        .addEventListener(
+            "click",
+            function () {
+
+                logoutUser();
+
+            }
+        );
+
 </script>
+
+
+
+<!-- MUSIC -->
+
+<script src="js/bg-music.js"></script>
+
 
 </body>
 

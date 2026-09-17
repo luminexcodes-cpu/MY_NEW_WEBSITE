@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#07111f"
+    >
+
+    <meta
+        name="description"
+        content="Gulu Secure PDF Library - Class Selection"
+    >
+
+    <title>
+        Gulu | Select Class
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="./css/style.css"
+    >
+
+    <style>
+
+        /* =========================================
+           CLASS PAGE
+        ========================================= */
+
+        .class-page {
+            width: 100%;
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+
+            padding: 34px 5% 25px;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(20, 100, 190, 0.10),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #07111f,
+                    #0b1728,
+                    #050b14
+                );
+
+            color: white;
+        }
+
+
+        /* =========================================
+           HEADER
+        ========================================= */
+
+        .class-header {
+            width: 100%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 30px;
+
+            padding-bottom: 30px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.08);
+        }
+
+
+        .class-brand {
+            display: flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .class-crown {
+            color: #1590ff;
+
+            font-size: 31px;
+
+            text-shadow:
+                0 0 15px
+                rgba(21,144,255,0.5);
+        }
+
+
+        .class-gulu {
+            color: #1590ff;
+
+            font-size: 34px;
+
+            font-weight: 800;
+
+            font-style: italic;
+
+            letter-spacing: -2px;
+        }
+
+
+        .class-header h1 {
+            font-size: 38px;
+
+            font-weight: 800;
+
+            letter-spacing: -0.5px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .class-header p {
+            color: #91a4bb;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================================
+           LOGOUT
+        ========================================= */
+
+        .class-logout {
+            padding: 12px 22px;
+
+            border:
+                1px solid
+                rgba(90,160,235,0.35);
+
+            border-radius: 10px;
+
+            background:
+                rgba(255,255,255,0.06);
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.25s ease;
+        }
+
+
+        .class-logout:hover {
+            background:
+                rgba(37,111,210,0.25);
+
+            border-color:
+                rgba(90,160,235,0.75);
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        /* =========================================
+           TOP
+        ========================================= */
+
+        .class-top {
+            width: 100%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            margin: 35px 0 22px;
+
+            padding-bottom: 20px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.08);
+        }
+
+
+        .class-top h2 {
+            font-size: 24px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .class-top p {
+            color: #8599b0;
+
+            font-size: 13px;
+        }
+
+
+        .class-count {
+            padding: 9px 15px;
+
+            border-radius: 20px;
+
+            border:
+                1px solid
+                rgba(74,151,235,0.25);
+
+            background:
+                rgba(42,127,216,0.10);
+
+            color: #8198b2;
+
+            font-size: 12px;
+        }
+
+
+        .class-count strong {
+            color: #55aaff;
+
+            font-size: 18px;
+
+            margin-right: 5px;
+        }
+
+
+        /* =========================================
+           GRID
+        ========================================= */
+
+        .class-grid {
+            width: 100%;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 22px;
+        }
+
+
+        /* =========================================
+           CARD
+        ========================================= */
+
+        .class-card {
+
+            position: relative;
+
+            width: 100%;
+
+            min-height: 175px;
+
+            padding: 27px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+
+            overflow: hidden;
+
+            border:
+                1px solid
+                rgba(125,166,209,0.14);
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.075),
+                    rgba(255,255,255,0.025)
+                );
+
+            box-shadow:
+                0 15px 35px
+                rgba(0,0,0,0.18);
+
+            cursor: pointer;
+
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .class-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+
+            left: -100%;
+
+            width: 100%;
+
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    #2995ff,
+                    transparent
+                );
+
+            transition:
+                left 0.45s ease;
+        }
+
+
+        .class-card:hover {
+
+            transform:
+                translateY(-6px);
+
+            border-color:
+                rgba(63,157,255,0.50);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(29,115,201,0.18),
+                    rgba(255,255,255,0.045)
+                );
+
+            box-shadow:
+                0 20px 42px
+                rgba(0,0,0,0.28),
+                0 0 25px
+                rgba(25,132,255,0.08);
+        }
+
+
+        .class-card:hover::before {
+            left: 100%;
+        }
+
+
+        /* =========================================
+           NUMBER
+        ========================================= */
+
+        .class-number {
+
+            width: 80px;
+
+            height: 80px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0969e8,
+                    #1590ff
+                );
+
+            color: white;
+
+            font-size: 30px;
+
+            font-weight: 900;
+
+            box-shadow:
+                0 10px 28px
+                rgba(0,112,255,0.23);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.12);
+        }
+
+
+        /* =========================================
+           INFO
+        ========================================= */
+
+        .class-info {
+            min-width: 0;
+
+            flex: 1;
+        }
+
+
+        .class-info h3 {
+            color: #eef5ff;
+
+            font-size: 21px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .class-info p {
+            color: #879bb1;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
+            margin-bottom: 8px;
+        }
+
+
+        .class-status {
+
+            display: inline-block;
+
+            padding: 5px 9px;
+
+            border-radius: 12px;
+
+            border:
+                1px solid
+                rgba(74,151,235,0.24);
+
+            background:
+                rgba(42,127,216,0.10);
+
+            color: #72b7ff;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.4px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =========================================
+           ARROW
+        ========================================= */
+
+        .class-arrow {
+
+            flex-shrink: 0;
+
+            color: #7892ae;
+
+            font-size: 28px;
+
+            transition:
+                0.25s ease;
+        }
+
+
+        .class-card:hover .class-arrow {
+
+            color: #53a8ff;
+
+            transform:
+                translateX(5px);
+        }
+
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        .class-footer {
+
+            width: 100%;
+
+            margin-top: auto;
+
+            padding-top: 35px;
+        }
+
+
+        .class-footer-inner {
+
+            padding: 22px 0;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.07);
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            color: #63768e;
+
+            font-size: 12px;
+        }
+
+
+        .class-footer strong {
+
+            color: #2d9aff;
+
+            font-size: 14px;
+
+            font-style: italic;
+        }
+
+
+        /* =========================================
+           TABLET
+        ========================================= */
+
+        @media (max-width: 800px) {
+
+            .class-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 600px) {
+
+            .class-page {
+                padding: 20px 14px;
+            }
+
+
+            .class-header {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+
+            .class-header h1 {
+                font-size: 28px;
+            }
+
+
+            .class-header p {
+                font-size: 13px;
+            }
+
+
+            .class-logout {
+                padding: 10px 15px;
+
+                font-size: 12px;
+            }
+
+
+            .class-top {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 12px;
+
+                margin-top: 25px;
+            }
+
+
+            .class-top h2 {
+                font-size: 20px;
+            }
+
+
+            .class-grid {
+                grid-template-columns: 1fr;
+
+                gap: 14px;
+            }
+
+
+            .class-card {
+
+                min-height: 135px;
+
+                padding: 17px;
+
+                gap: 14px;
+            }
+
+
+            .class-number {
+
+                width: 58px;
+
+                height: 58px;
+
+                border-radius: 14px;
+
+                font-size: 23px;
+            }
+
+
+            .class-info h3 {
+                font-size: 17px;
+            }
+
+
+            .class-info p {
+                font-size: 11px;
+            }
+
+
+            .class-arrow {
+                font-size: 22px;
+            }
+
+
+            .class-footer-inner {
+
+                flex-direction: column;
+
+                gap: 8px;
+
+                text-align: center;
+            }
+
+        }
+
+
+        @media (max-width: 400px) {
+
+            .class-page {
+                padding: 18px 10px;
+            }
+
+
+            .class-header h1 {
+                font-size: 24px;
+            }
+
+
+            .class-card {
+                padding: 15px;
+            }
+
+
+            .class-number {
+
+                width: 52px;
+
+                height: 52px;
+
+                font-size: 21px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="class-page">
+
+
+    <!-- HEADER -->
+
+    <header class="class-header">
+
+        <div>
+
+            <div class="class-brand">
+
+                <span class="class-crown">
+                    ♕
+                </span>
+
+                <span class="class-gulu">
+                    Gulu
+                </span>
+
+            </div>
+
+
+            <h1>
+                SELECT YOUR CLASS
+            </h1>
+
+
+            <p>
+                Choose your class to access the study library
+            </p>
+
+        </div>
+
+
+        <button
+            class="class-logout"
+            id="logoutBtn"
+            type="button"
+        >
+            Logout
+        </button>
+
+    </header>
+
+
+
+    <!-- TOP -->
+
+    <section class="class-top">
+
+        <div>
+
+            <h2>
+                Available Classes
+            </h2>
+
+            <p>
+                Select your class to continue
+            </p>
+
+        </div>
+
+
+        <div class="class-count">
+
+            <strong id="classCount">
+                5
+            </strong>
+
+            Classes
+
+        </div>
+
+    </section>
+
+
+
+    <!-- CLASS GRID -->
+
+    <main>
+
+        <div
+            class="class-grid"
+            id="classGrid"
+        ></div>
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="class-footer">
+
+        <div class="class-footer-inner">
+
+            <div>
+                Secure PDF Library
+            </div>
+
+            <div>
+                Created by <strong>Gulshan</strong>
+            </div>
+
+        </div>
+
+    </footer>
+
+</div>
+
+
+
+<!-- DATA -->
+
+<script src="js/library-data.js"></script>
+
+
+<!-- MAIN SCRIPT -->
+
+<script src="js/script.js"></script>
+
+
+<script>
+
+    /* =====================================
+       PROTECT PAGE
+    ====================================== */
+
+    protectPage();
+
+
+
+    /* =====================================
+       LOGOUT
+    ====================================== */
+
+    document
+        .getElementById("logoutBtn")
+        .addEventListener(
+            "click",
+            function () {
+
+                logoutUser();
+
+            }
+        );
+
+
+
+    /* =====================================
+       CLASS DATA
+    ====================================== */
+
+    const classGrid =
+        document.getElementById(
+            "classGrid"
+        );
+
+
+    const classCount =
+        document.getElementById(
+            "classCount"
+        );
+
+
+    const classes =
+        Object.entries(
+            LIBRARY_DATA
+        );
+
+
+    classCount.textContent =
+        classes.length;
+
+
+
+    /* =====================================
+       SELECT CLASS
+    ====================================== */
+
+    function selectClass(className) {
+
+        sessionStorage.setItem(
+            "selectedClass",
+            className
+        );
+
+
+        sessionStorage.removeItem(
+            "selectedSubject"
+        );
+
+
+        sessionStorage.removeItem(
+            "subjectUnlocked"
+        );
+
+
+        window.location.replace(
+            "library.html"
+        );
+
+    }
+
+
+
+    /* =====================================
+       CREATE CLASS CARDS
+    ====================================== */
+
+    classes.forEach(
+        function ([classKey, classInfo]) {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "class-card";
+
+
+            card.setAttribute(
+                "role",
+                "button"
+            );
+
+
+            card.setAttribute(
+                "tabindex",
+                "0"
+            );
+
+
+            card.setAttribute(
+                "aria-label",
+                "Select " + classInfo.name
+            );
+
+
+            card.innerHTML = `
+
+                <div class="class-number">
+                    ${classInfo.name.replace("Class ", "")}
+                </div>
+
+
+                <div class="class-info">
+
+                    <h3>
+                        ${classInfo.name}
+                    </h3>
+
+                    <p>
+                        ${classInfo.fullName} notes,
+                        chapters, practice material
+                        and PDF documents.
+                    </p>
+
+                    <span class="class-status">
+                        Available
+                    </span>
+
+                </div>
+
+
+                <span class="class-arrow">
+                    →
+                </span>
+
+            `;
+
+
+            card.addEventListener(
+                "click",
+                function () {
+
+                    selectClass(
+                        classKey
+                    );
+
+                }
+            );
+
+
+            card.addEventListener(
+                "keydown",
+                function (event) {
+
+                    if (
+                        event.key === "Enter" ||
+                        event.key === " "
+                    ) {
+
+                        event.preventDefault();
+
+                        selectClass(
+                            classKey
+                        );
+
+                    }
+
+                }
+            );
+
+
+            classGrid.appendChild(
+                card
+            );
+
+        }
+    );
+
+</script>
+
+
+<!-- MUSIC -->
+
+<script src="js/bg-music.js"></script>
+
+
+</body>
+
+</html>

@@ -15,7 +15,9 @@
         content="#07111f"
     >
 
-    <title>Gulu | Subject Library</title>
+    <title>
+        Gulu | Subject Library
+    </title>
 
     <link
         rel="stylesheet"
@@ -30,9 +32,7 @@
 <div class="library-page">
 
 
-    <!-- =====================================
-         HEADER
-    ====================================== -->
+    <!-- HEADER -->
 
     <header class="library-header">
 
@@ -50,20 +50,56 @@
 
             </div>
 
+
             <h1 id="subjectTitle">
                 Subject
             </h1>
 
+
             <p id="subjectSubtitle">
                 Your study documents
             </p>
+
+
+            <div
+                style="
+                    display:inline-flex;
+                    align-items:center;
+                    gap:7px;
+                    margin-top:10px;
+                    padding:7px 12px;
+                    border-radius:20px;
+                    border:1px solid rgba(74,151,235,0.28);
+                    background:rgba(42,127,216,0.11);
+                    color:#8cbfff;
+                    font-size:12px;
+                    font-weight:600;
+                "
+            >
+
+                <span
+                    style="
+                        width:7px;
+                        height:7px;
+                        border-radius:50%;
+                        background:#35d18a;
+                        box-shadow:0 0 9px rgba(53,209,138,0.65);
+                    "
+                ></span>
+
+                <span id="classText">
+                    Class
+                </span>
+
+            </div>
 
         </div>
 
 
         <button
             class="logout-btn"
-            onclick="logout()"
+            id="logoutBtn"
+            type="button"
         >
             Logout
         </button>
@@ -72,15 +108,14 @@
 
 
 
-    <!-- =====================================
-         BACK BUTTON
-    ====================================== -->
+    <!-- BACK -->
 
-    <div style="margin-top: 25px;">
+    <div style="margin-top:25px;">
 
         <button
             class="logout-btn"
-            onclick="goBack()"
+            id="backSubjectsBtn"
+            type="button"
         >
             ← Back to Subjects
         </button>
@@ -89,9 +124,7 @@
 
 
 
-    <!-- =====================================
-         DOCUMENT TITLE
-    ====================================== -->
+    <!-- DOCUMENT TITLE -->
 
     <div class="library-top">
 
@@ -122,9 +155,7 @@
 
 
 
-    <!-- =====================================
-         PDF GRID
-    ====================================== -->
+    <!-- PDF GRID -->
 
     <main>
 
@@ -137,9 +168,7 @@
 
 
 
-    <!-- =====================================
-         FOOTER
-    ====================================== -->
+    <!-- FOOTER -->
 
     <footer class="library-footer">
 
@@ -153,14 +182,16 @@
 
     </footer>
 
-
 </div>
 
 
 
-<!-- =====================================
-     LOGIN / PAGE SCRIPT
-====================================== -->
+<!-- DATA -->
+
+<script src="js/library-data.js"></script>
+
+
+<!-- MAIN SCRIPT -->
 
 <script src="js/script.js"></script>
 
@@ -168,149 +199,107 @@
 <script>
 
     /* =====================================
-       PROTECT PAGE
-    ===================================== */
+       PROTECT LOGIN
+    ====================================== */
 
     protectPage();
 
 
 
     /* =====================================
+       SELECTED CLASS
+    ====================================== */
+
+    const selectedClass =
+        sessionStorage.getItem(
+            "selectedClass"
+        );
+
+
+    if (
+        !selectedClass ||
+        !LIBRARY_DATA[selectedClass]
+    ) {
+
+        window.location.replace(
+            "classes.html"
+        );
+
+    }
+
+
+    const currentClass =
+        LIBRARY_DATA[selectedClass];
+
+
+
+    /* =====================================
        GET SUBJECT
-    ===================================== */
+    ====================================== */
 
     const params =
         new URLSearchParams(
             window.location.search
         );
 
-    const subject =
-        params.get("subject");
 
-
-
-    /* =====================================
-       PDF DATA
-       YAHAN BAAD MEIN PDFs ADD KARENGE
-    ===================================== */
-
-    const subjects = {
-
-        english: {
-            title: "English",
-            subtitle: "English notes, chapters and study material",
-            pdfs: []
-        },
-
-        maths: {
-            title: "Mathematics",
-            subtitle: "Mathematics chapters and practice material",
-            pdfs: []
-        },
-
-        science: {
-            title: "Science",
-            subtitle: "Science chapters, notes and important questions",
-            pdfs: []
-        },
-
-        "Social-science": {
-            title: "Social Science",
-            subtitle: "History, Geography, Civics and Economics",
-            pdfs: [
-                {
-                    name: "SECTION-B CH-1",
-                    file: "pdfs/Social-science/GSEB_Class_10_Chapter_1_Section_B_Final.pdf"
-                },
-                {
-                    name: "SECTION-B CH-2",
-                    file: "pdfs/Social-science/GSEB_Class_10_Chapter_2_Section_B_Final.pdf"
-                },
-                {
-                    name: "SECTION-B CH-3",
-                    file: "pdfs/Social-science/GSEB_Class_10_Chapter_3_Section_B_Final.pdf"
-                },
-                { 
-                    name: "SECTION-B CH-4",
-                    file: "pdfs/Social-science/GSEB_Class_10_Chapter_4_Section_B_Final.pdf"    
-                },
-                {
-                    name: "SECTION-B CH-5",
-                    file: "pdfs/Social-science/GSEB_Class_10_Chapter_5_Section_B_Final.pdf"
-                },
-                {
-                    name: "SECTION-B CH-8",
-                    file: "pdfs/Social-science/GSEB_Class_10_Chapter_8_Section_B_Final.pdf"
-                },
-                {
-                    name: "SECTION-B CH-9",
-                    file: "pdfs/Social-science/GSEB_Class_10_Chapter_9_Section_B_Final.pdf"
-                },
-                {
-                    name: "SECTION-B CH-10",
-                    file: "pdfs/Social-science/GSEB_Class_10_Chapter_10_Section_B_Final.pdf"
-                },
-                {
-                    name: "SECTION-B CH-11",
-                    file: "pdfs/Social-science/GSEB_Class_10_Chapter_11_Section_B_Final.pdf"
-                },
-                {
-                    name: "SECTION-B CH-15",
-                    file: "pdfs/Social-science/GSEB_Class_10_Chapter_15_Section_B_Final.pdf"
-                },
-                {
-                    name: "SECTION-B CH-16",
-                    file: "pdfs/Social-science/GSEB_Class_10_Chapter_16_Section_B_Final.pdf"
-                },
-                {
-                    name: "SECTION-B CH-17",
-                    file: "pdfs/Social-science/GSEB_Class_10_Chapter_17_Section_B_Final.pdf"
-                }
-            ]
-        },
-
-        gujarati: {
-            title: "Gujarati",
-            subtitle: "Gujarati chapters, notes and study material",
-            pdfs: []
-        },
-
-        sanskrit: {
-            title: "Sanskrit",
-            subtitle: "Sanskrit chapters and study material",
-            pdfs: []
-        }
-
-    };
+    const subjectKey =
+        params.get(
+            "subject"
+        );
 
 
 
     /* =====================================
        CHECK SUBJECT
-    ===================================== */
+    ====================================== */
 
-    if (!subject || !subjects[subject]) {
+    const currentSubject =
+        currentClass.subjects[
+            subjectKey
+        ];
 
-        window.location.replace("library.html");
+
+    const selectedSubject =
+        sessionStorage.getItem(
+            "selectedSubject"
+        );
+
+
+    const subjectUnlocked =
+        sessionStorage.getItem(
+            "subjectUnlocked"
+        );
+
+
+    if (
+        !currentSubject ||
+        selectedSubject !== subjectKey ||
+        subjectUnlocked !== "true"
+    ) {
+
+        window.location.replace(
+            "library.html"
+        );
 
     }
 
 
 
     /* =====================================
-       LOAD SUBJECT
-    ===================================== */
+       CLASS / SUBJECT DISPLAY
+    ====================================== */
 
-    const currentSubject =
-        subjects[subject];
-
+    document.getElementById(
+        "classText"
+    ).textContent =
+        currentClass.fullName;
 
 
     document.getElementById(
         "subjectTitle"
     ).textContent =
         currentSubject.title;
-
 
 
     document.getElementById(
@@ -321,8 +310,8 @@
 
 
     /* =====================================
-       LOAD PDFS
-    ===================================== */
+       PDF ELEMENTS
+    ====================================== */
 
     const pdfGrid =
         document.getElementById(
@@ -341,25 +330,32 @@
 
 
 
-    if (currentSubject.pdfs.length === 0) {
+    /* =====================================
+       NO PDF
+    ====================================== */
+
+    if (
+        currentSubject.pdfs.length === 0
+    ) {
 
         pdfGrid.innerHTML = `
+
             <div
                 style="
-                    grid-column: 1 / -1;
-                    text-align: center;
-                    padding: 70px 20px;
-                    color: #7f92aa;
-                    border: 1px solid rgba(255,255,255,0.08);
-                    border-radius: 18px;
-                    background: rgba(255,255,255,0.03);
+                    grid-column:1 / -1;
+                    text-align:center;
+                    padding:70px 20px;
+                    color:#7f92aa;
+                    border:1px solid rgba(255,255,255,0.08);
+                    border-radius:18px;
+                    background:rgba(255,255,255,0.03);
                 "
             >
 
                 <h3
                     style="
-                        color: #dbeafe;
-                        margin-bottom: 10px;
+                        color:#dbeafe;
+                        margin-bottom:10px;
                     "
                 >
                     No PDFs yet
@@ -370,9 +366,16 @@
                 </p>
 
             </div>
+
         `;
 
     }
+
+
+
+    /* =====================================
+       PDF CARDS
+    ====================================== */
 
     else {
 
@@ -389,12 +392,16 @@
                     "pdf-card";
 
 
-                card.onclick =
-                    function () {
+                card.setAttribute(
+                    "role",
+                    "button"
+                );
 
-                        openPDF(pdf.file);
 
-                    };
+                card.setAttribute(
+                    "tabindex",
+                    "0"
+                );
 
 
                 card.innerHTML = `
@@ -402,6 +409,7 @@
                     <div class="pdf-icon">
                         PDF
                     </div>
+
 
                     <div class="pdf-info">
 
@@ -415,6 +423,7 @@
 
                     </div>
 
+
                     <span class="arrow">
                         →
                     </span>
@@ -422,7 +431,42 @@
                 `;
 
 
-                pdfGrid.appendChild(card);
+                card.addEventListener(
+                    "click",
+                    function () {
+
+                        openPDF(
+                            pdf.file
+                        );
+
+                    }
+                );
+
+
+                card.addEventListener(
+                    "keydown",
+                    function (event) {
+
+                        if (
+                            event.key === "Enter" ||
+                            event.key === " "
+                        ) {
+
+                            event.preventDefault();
+
+                            openPDF(
+                                pdf.file
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                pdfGrid.appendChild(
+                    card
+                );
 
             }
         );
@@ -433,13 +477,15 @@
 
     /* =====================================
        OPEN PDF
-    ===================================== */
+    ====================================== */
 
     function openPDF(file) {
 
         window.location.href =
             "viewer.html?file=" +
-            encodeURIComponent(file);
+            encodeURIComponent(
+                file
+            );
 
     }
 
@@ -447,32 +493,50 @@
 
     /* =====================================
        BACK
-    ===================================== */
+    ====================================== */
 
-    function goBack() {
+    document
+        .getElementById(
+            "backSubjectsBtn"
+        )
+        .addEventListener(
+            "click",
+            function () {
 
-        window.location.href =
-            "library.html";
+                window.location.replace(
+                    "library.html"
+                );
 
-    }
+            }
+        );
 
 
 
     /* =====================================
        LOGOUT
-    ===================================== */
+    ====================================== */
 
-    function logout() {
+    document
+        .getElementById(
+            "logoutBtn"
+        )
+        .addEventListener(
+            "click",
+            function () {
 
-        logoutUser();
+                logoutUser();
 
-    }
+            }
+        );
 
 </script>
 
 
-</body>
+<!-- MUSIC -->
 
 <script src="js/bg-music.js"></script>
+
+
+</body>
 
 </html>
