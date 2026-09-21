@@ -358,9 +358,7 @@ LIBRARY_DATA
                 "pdfs/Class-10/Science/GSEB_Class_10_Chapter_2_Section_B_Final.pdf"
         },
 
-        {
-            name:
-                "SECTION-B CH-4",
+      
             
             
             
