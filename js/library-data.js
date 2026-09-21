@@ -348,7 +348,7 @@ LIBRARY_DATA
                 "SECTION-B CH-1",
             
             file:
-                "pdfs/Class-10/Science/GSEB_Class_10_Science_Section_C_Chapter_1.pdf"
+                "pdfs/Class 10/Science/GSEB_Class_10_Science_Section_C_Chapter_1.pdf"
         },    
             
         {
