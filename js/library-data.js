@@ -355,8 +355,8 @@ LIBRARY_DATA
             name:
                 "SECTION-B CH-2",
             file:
-                "pdfs/Class 10/Science/GSEB_Class_10_Science_Section_C_Chapter_2.pdf"
-        },
+                "pdfs/Class 10/Science/GSEB_Class_10_Science_Section_C_Chapter_6.pdf"
+        }
 
       
             
