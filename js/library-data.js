@@ -338,28 +338,42 @@ LIBRARY_DATA
 
     ];
 
-    LIBRARY_DATA
-    .class9
-    .subjects
-    .hindi = {
+LIBRARY_DATA
+    .class10
+    .subjects["science"]
+    .pdfs = [
 
-    title: "Hindi",
+        {
+            name:
+                "SECTION-B CH-1",
+            
+            file:
+                "pdfs/Class-10/Science/GSEB_Class_10_Chapter_1_Section_B_Final.pdf"
+        },    
+            
+        {
+            name:
+                "SECTION-B CH-2",
+            file:
+                "pdfs/Class-10/Science/GSEB_Class_10_Chapter_2_Section_B_Final.pdf"
+        },
 
-    subtitle: "Hindi chapters, notes and study material",
+        {
+            name:
+                "SECTION-B CH-4",
+            
+            
+            
+            
+            ]  
 
-    password: "kk mam",
+
+
+
 
     
-        pdfs: [
-    {
-        name: "Chapter 1",
-        file: "pdfs/Class-9/Hindi/Chapter-1.pdf"
-    }
-]
-    
-
-};
-
+           
+        
 
 
 
