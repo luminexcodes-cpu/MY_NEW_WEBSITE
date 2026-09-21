@@ -348,14 +348,14 @@ LIBRARY_DATA
                 "SECTION-B CH-1",
             
             file:
-                "pdfs/Class-10/Science/GSEB_Class_10_Chapter_1_Section_B_Final.pdf"
+                "pdfs/Class-10/Science/GSEB_Class_10_Science_Section_C_Chapter_1.pdf"
         },    
             
         {
             name:
                 "SECTION-B CH-2",
             file:
-                "pdfs/Class-10/Science/GSEB_Class_10_Chapter_2_Section_B_Final.pdf"
+                "pdfs/Class-10/Science/GSEB_Class_10_Science_Section_C_Chapter_2.pdf"
         },
 
       
