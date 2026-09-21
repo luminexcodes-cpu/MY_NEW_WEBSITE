@@ -234,7 +234,7 @@ LIBRARY_DATA
                 "SECTION-B CH-1",
 
             file:
-                "pdfs/Social-science/GSEB_Class_10_Chapter_1_Section_B_Final.pdf"
+                "pdfs/Class-10/Social-science/GSEB_Class_10_Chapter_1_Section_B_Final.pdf"
         },
 
 
@@ -243,7 +243,7 @@ LIBRARY_DATA
                 "SECTION-B CH-2",
 
             file:
-                "pdfs/Social-science/GSEB_Class_10_Chapter_2_Section_B_Final.pdf"
+                "pdfs/Class-10/Social-science/GSEB_Class_10_Chapter_2_Section_B_Final.pdf"
         },
 
 
@@ -252,7 +252,7 @@ LIBRARY_DATA
                 "SECTION-B CH-3",
 
             file:
-                "pdfs/Social-science/GSEB_Class_10_Chapter_3_Section_B_Final.pdf"
+                "pdfs/Class-10/Social-science/GSEB_Class_10_Chapter_3_Section_B_Final.pdf"
         },
 
 
@@ -261,7 +261,7 @@ LIBRARY_DATA
                 "SECTION-B CH-4",
 
             file:
-                "pdfs/Social-science/GSEB_Class_10_Chapter_4_Section_B_Final.pdf"
+                "pdfs/Class-10/Social-science/GSEB_Class_10_Chapter_4_Section_B_Final.pdf"
         },
 
 
@@ -270,7 +270,7 @@ LIBRARY_DATA
                 "SECTION-B CH-5",
 
             file:
-                "pdfs/Social-science/GSEB_Class_10_Chapter_5_Section_B_Final.pdf"
+                "pdfs/Class-10/Social-science/GSEB_Class_10_Chapter_5_Section_B_Final.pdf"
         },
 
 
@@ -279,7 +279,7 @@ LIBRARY_DATA
                 "SECTION-B CH-8",
 
             file:
-                "pdfs/Social-science/GSEB_Class_10_Chapter_8_Section_B_Final.pdf"
+                "pdfs/Class-10/Social-science/GSEB_Class_10_Chapter_8_Section_B_Final.pdf"
         },
 
 
@@ -288,7 +288,7 @@ LIBRARY_DATA
                 "SECTION-B CH-9",
 
             file:
-                "pdfs/Social-science/GSEB_Class_10_Chapter_9_Section_B_Final.pdf"
+                "pdfs/Class-10/Social-science/GSEB_Class_10_Chapter_9_Section_B_Final.pdf"
         },
 
 
@@ -297,7 +297,7 @@ LIBRARY_DATA
                 "SECTION-B CH-10",
 
             file:
-                "pdfs/Social-science/GSEB_Class_10_Chapter_10_Section_B_Final.pdf"
+                "pdfs/Class-10/Social-science/GSEB_Class_10_Chapter_10_Section_B_Final.pdf"
         },
 
 
@@ -306,7 +306,7 @@ LIBRARY_DATA
                 "SECTION-B CH-11",
 
             file:
-                "pdfs/Social-science/GSEB_Class_10_Chapter_11_Section_B_Final.pdf"
+                "pdfs/Class-10/Social-science/GSEB_Class_10_Chapter_11_Section_B_Final.pdf"
         },
 
 
@@ -315,7 +315,7 @@ LIBRARY_DATA
                 "SECTION-B CH-15",
 
             file:
-                "pdfs/Social-science/GSEB_Class_10_Chapter_15_Section_B_Final.pdf"
+                "pdfs/Class-10/Social-science/GSEB_Class_10_Chapter_15_Section_B_Final.pdf"
         },
 
 
@@ -324,7 +324,7 @@ LIBRARY_DATA
                 "SECTION-B CH-16",
 
             file:
-                "pdfs/Social-science/GSEB_Class_10_Chapter_16_Section_B_Final.pdf"
+                "pdfs/Class-10/Social-science/GSEB_Class_10_Chapter_16_Section_B_Final.pdf"
         },
 
 
@@ -333,7 +333,36 @@ LIBRARY_DATA
                 "SECTION-B CH-17",
 
             file:
-                "pdfs/Social-science/GSEB_Class_10_Chapter_17_Section_B_Final.pdf"
+                "pdfs/Class-10/Social-science/GSEB_Class_10_Chapter_17_Section_B_Final.pdf"
         }
 
     ];
+
+    LIBRARY_DATA
+    .class9
+    .subjects
+    .hindi = {
+
+    title: "Hindi",
+
+    subtitle: "Hindi chapters, notes and study material",
+
+    password: "kk mam",
+
+    
+        pdfs: [
+    {
+        name: "Chapter 1",
+        file: "pdfs/Class-9/Hindi/Chapter-1.pdf"
+    }
+]
+    
+
+};
+
+
+
+
+    
+
+        
