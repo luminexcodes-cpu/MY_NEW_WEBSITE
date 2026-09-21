@@ -340,7 +340,7 @@ LIBRARY_DATA
 
 LIBRARY_DATA
     .class10
-    .subjects["Science"]
+    .subjects["science"]
     .pdfs = [
 
         {
