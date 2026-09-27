@@ -15,8 +15,18 @@
         content="#07111f"
     >
 
+    <meta
+        name="description"
+        content="Gulu PDF Library - Select your subject and access GSEB study material, notes, assignments and PDF documents."
+    >
+
+    <meta
+        name="robots"
+        content="index, follow"
+    >
+
     <title>
-        Gulu PDF Library
+        Gulu PDF Library | Subjects
     </title>
 
     <link
@@ -24,7 +34,18 @@
         href="./css/style.css"
     >
 
+    <link
+        rel="icon"
+        type="image/png"
+        href="./logo.png"
+    >
+
+
     <style>
+
+        /* =====================================
+           SELECTED CLASS BADGE
+        ====================================== */
 
         .selected-class-badge {
 
@@ -52,12 +73,14 @@
             font-size: 12px;
 
             font-weight: 600;
+
         }
 
 
         .selected-class-badge .dot {
 
             width: 7px;
+
             height: 7px;
 
             border-radius: 50%;
@@ -67,8 +90,13 @@
             box-shadow:
                 0 0 9px
                 rgba(53,209,138,0.65);
+
         }
 
+
+        /* =====================================
+           LIBRARY ACTIONS
+        ====================================== */
 
         .library-actions {
 
@@ -79,6 +107,7 @@
             gap: 10px;
 
             flex-shrink: 0;
+
         }
 
 
@@ -105,6 +134,7 @@
             cursor: pointer;
 
             transition: 0.25s ease;
+
         }
 
 
@@ -120,8 +150,13 @@
 
             transform:
                 translateY(-2px);
+
         }
 
+
+        /* =====================================
+           CLASS LABEL
+        ====================================== */
 
         .library-top-class {
 
@@ -136,8 +171,13 @@
             text-transform: uppercase;
 
             margin-bottom: 7px;
+
         }
 
+
+        /* =====================================
+           MOBILE
+        ====================================== */
 
         @media (max-width: 600px) {
 
@@ -147,9 +187,11 @@
 
                 display: grid;
 
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns:
+                    1fr 1fr;
 
                 gap: 10px;
+
             }
 
 
@@ -157,6 +199,7 @@
             .logout-btn {
 
                 width: 100%;
+
             }
 
         }
@@ -166,7 +209,9 @@
 
             .library-actions {
 
-                grid-template-columns: 1fr;
+                grid-template-columns:
+                    1fr;
+
             }
 
         }
@@ -178,10 +223,13 @@
 
 <body>
 
+
 <div class="library-page">
 
 
-    <!-- HEADER -->
+    <!-- =====================================
+         HEADER
+    ====================================== -->
 
     <header class="library-header">
 
@@ -234,21 +282,15 @@
             </button>
 
 
-            <button
-                class="logout-btn"
-                id="logoutBtn"
-                type="button"
-            >
-                Logout
-            </button>
-
         </div>
 
     </header>
 
 
 
-    <!-- TOP -->
+    <!-- =====================================
+         TOP
+    ====================================== -->
 
     <div class="library-top">
 
@@ -288,7 +330,9 @@
 
 
 
-    <!-- SUBJECTS -->
+    <!-- =====================================
+         SUBJECTS
+    ====================================== -->
 
     <main>
 
@@ -301,7 +345,9 @@
 
 
 
-    <!-- FOOTER -->
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
 
     <footer class="library-footer">
 
@@ -320,25 +366,14 @@
 
 
 
-<!-- DATA -->
+<!-- =====================================
+     DATA
+====================================== -->
 
-<script src="js/library-data.js"></script>
-
-
-<!-- MAIN SCRIPT -->
-
-<script src="js/script.js"></script>
+<script src="./js/library-data.js"></script>
 
 
 <script>
-
-    /* =====================================
-       PROTECT
-    ====================================== */
-
-    protectPage();
-
-
 
     /* =====================================
        SELECTED CLASS
@@ -350,10 +385,20 @@
         );
 
 
+    /*
+       If no class was selected,
+       return to class selection.
+    */
+
     if (
         !selectedClass ||
+        typeof LIBRARY_DATA === "undefined" ||
         !LIBRARY_DATA[selectedClass]
     ) {
+
+        sessionStorage.removeItem(
+            "selectedClass"
+        );
 
         sessionStorage.removeItem(
             "selectedSubject"
@@ -426,11 +471,15 @@
     function askSubjectPassword(subjectKey) {
 
         const subject =
-            currentClass.subjects[subjectKey];
+            currentClass.subjects[
+                subjectKey
+            ];
 
 
         if (!subject) {
+
             return;
+
         }
 
 
@@ -441,7 +490,9 @@
 
 
         if (password === null) {
+
             return;
+
         }
 
 
@@ -512,9 +563,18 @@
             );
 
 
+            card.setAttribute(
+                "aria-label",
+                "Open " +
+                subject.title
+            );
+
+
             card.innerHTML = `
 
-                <div class="subject-icon ${getSubjectIconClass(subjectKey)}">
+                <div
+                    class="subject-icon ${getSubjectIconClass(subjectKey)}"
+                >
                     ${getSubjectIcon(subjectKey)}
                 </div>
 
@@ -524,6 +584,7 @@
                     <h3>
                         ${subject.title}
                     </h3>
+
 
                     <p>
                         ${subject.subtitle}
@@ -539,6 +600,8 @@
             `;
 
 
+            /* CLICK */
+
             card.addEventListener(
                 "click",
                 function () {
@@ -550,6 +613,8 @@
                 }
             );
 
+
+            /* KEYBOARD */
 
             card.addEventListener(
                 "keydown",
@@ -582,7 +647,7 @@
 
 
     /* =====================================
-       SUBJECT ICON
+       SUBJECT ICON CLASS
     ====================================== */
 
     function getSubjectIconClass(
@@ -608,15 +673,22 @@
 
             sanskrit:
                 "sanskrit-icon"
-                
 
         };
 
 
-        return classes[subjectKey] || "";
+        return (
+            classes[subjectKey] ||
+            ""
+        );
 
     }
 
+
+
+    /* =====================================
+       SUBJECT ICON
+    ====================================== */
 
     function getSubjectIcon(
         subjectKey
@@ -642,12 +714,13 @@
             sanskrit:
                 "ॐ"
 
-            
-
         };
 
 
-        return icons[subjectKey] || "?";
+        return (
+            icons[subjectKey] ||
+            "?"
+        );
 
     }
 
@@ -687,32 +760,15 @@
             }
         );
 
-
-
-    /* =====================================
-       LOGOUT
-    ====================================== */
-
-    document
-        .getElementById(
-            "logoutBtn"
-        )
-        .addEventListener(
-            "click",
-            function () {
-
-                logoutUser();
-
-            }
-        );
-
 </script>
 
 
 
-<!-- MUSIC -->
+<!-- =====================================
+     BACKGROUND MUSIC
+====================================== -->
 
-<script src="js/bg-music.js"></script>
+<script src="./js/bg-music.js"></script>
 
 
 </body>

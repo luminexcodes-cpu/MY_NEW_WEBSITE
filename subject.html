@@ -15,6 +15,16 @@
         content="#07111f"
     >
 
+    <meta
+        name="description"
+        content="Gulu PDF Library subject documents and study material."
+    >
+
+    <meta
+        name="robots"
+        content="index, follow"
+    >
+
     <title>
         Gulu | Subject Library
     </title>
@@ -22,6 +32,12 @@
     <link
         rel="stylesheet"
         href="./css/style.css"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="./logo.png"
     >
 
 </head>
@@ -32,7 +48,9 @@
 <div class="library-page">
 
 
-    <!-- HEADER -->
+    <!-- =====================================
+         HEADER
+    ====================================== -->
 
     <header class="library-header">
 
@@ -98,33 +116,19 @@
 
         <button
             class="logout-btn"
-            id="logoutBtn"
-            type="button"
-        >
-            Logout
-        </button>
-
-    </header>
-
-
-
-    <!-- BACK -->
-
-    <div style="margin-top:25px;">
-
-        <button
-            class="logout-btn"
             id="backSubjectsBtn"
             type="button"
         >
             ← Back to Subjects
         </button>
 
-    </div>
+    </header>
 
 
 
-    <!-- DOCUMENT TITLE -->
+    <!-- =====================================
+         DOCUMENT TITLE
+    ====================================== -->
 
     <div class="library-top">
 
@@ -155,7 +159,9 @@
 
 
 
-    <!-- PDF GRID -->
+    <!-- =====================================
+         PDF GRID
+    ====================================== -->
 
     <main>
 
@@ -168,7 +174,9 @@
 
 
 
-    <!-- FOOTER -->
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
 
     <footer class="library-footer">
 
@@ -182,29 +190,19 @@
 
     </footer>
 
+
 </div>
 
 
 
-<!-- DATA -->
+<!-- =====================================
+     DATA
+====================================== -->
 
-<script src="js/library-data.js"></script>
-
-
-<!-- MAIN SCRIPT -->
-
-<script src="js/script.js"></script>
+<script src="./js/library-data.js"></script>
 
 
 <script>
-
-    /* =====================================
-       PROTECT LOGIN
-    ====================================== */
-
-    protectPage();
-
-
 
     /* =====================================
        SELECTED CLASS
@@ -218,8 +216,17 @@
 
     if (
         !selectedClass ||
+        typeof LIBRARY_DATA === "undefined" ||
         !LIBRARY_DATA[selectedClass]
     ) {
+
+        sessionStorage.removeItem(
+            "selectedSubject"
+        );
+
+        sessionStorage.removeItem(
+            "subjectUnlocked"
+        );
 
         window.location.replace(
             "classes.html"
@@ -404,6 +411,12 @@
                 );
 
 
+                card.setAttribute(
+                    "aria-label",
+                    "Open " + pdf.name
+                );
+
+
                 card.innerHTML = `
 
                     <div class="pdf-icon">
@@ -431,6 +444,8 @@
                 `;
 
 
+                /* CLICK */
+
                 card.addEventListener(
                     "click",
                     function () {
@@ -442,6 +457,8 @@
                     }
                 );
 
+
+                /* KEYBOARD */
 
                 card.addEventListener(
                     "keydown",
@@ -492,7 +509,7 @@
 
 
     /* =====================================
-       BACK
+       BACK TO SUBJECTS
     ====================================== */
 
     document
@@ -510,31 +527,15 @@
             }
         );
 
-
-
-    /* =====================================
-       LOGOUT
-    ====================================== */
-
-    document
-        .getElementById(
-            "logoutBtn"
-        )
-        .addEventListener(
-            "click",
-            function () {
-
-                logoutUser();
-
-            }
-        );
-
 </script>
 
 
-<!-- MUSIC -->
 
-<script src="js/bg-music.js"></script>
+<!-- =====================================
+     BACKGROUND MUSIC
+====================================== -->
+
+<script src="./js/bg-music.js"></script>
 
 
 </body>

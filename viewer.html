@@ -15,6 +15,16 @@
         content="#07111f"
     >
 
+    <meta
+        name="description"
+        content="Gulu PDF Library online PDF viewer."
+    >
+
+    <meta
+        name="robots"
+        content="index, follow"
+    >
+
     <title>
         Gulu | PDF Viewer
     </title>
@@ -24,8 +34,18 @@
         href="./css/style.css"
     >
 
+    <link
+        rel="icon"
+        type="image/png"
+        href="./logo.png"
+    >
+
 
     <style>
+
+        /* =====================================
+           VIEWER PAGE
+        ====================================== */
 
         .viewer-page {
 
@@ -45,8 +65,13 @@
                 );
 
             overflow: hidden;
+
         }
 
+
+        /* =====================================
+           HEADER
+        ====================================== */
 
         .viewer-header {
 
@@ -74,6 +99,7 @@
                 rgba(0,0,0,0.30);
 
             z-index: 10;
+
         }
 
 
@@ -86,8 +112,13 @@
             gap: 14px;
 
             min-width: 0;
+
         }
 
+
+        /* =====================================
+           BACK BUTTON
+        ====================================== */
 
         .back-btn {
 
@@ -113,6 +144,7 @@
             cursor: pointer;
 
             transition: 0.2s ease;
+
         }
 
 
@@ -126,8 +158,13 @@
 
             transform:
                 translateY(-1px);
+
         }
 
+
+        /* =====================================
+           BRAND
+        ====================================== */
 
         .viewer-brand {
 
@@ -136,6 +173,7 @@
             align-items: center;
 
             gap: 7px;
+
         }
 
 
@@ -148,6 +186,7 @@
             text-shadow:
                 0 0 15px
                 rgba(21,144,255,0.55);
+
         }
 
 
@@ -162,8 +201,13 @@
             font-style: italic;
 
             letter-spacing: -1px;
+
         }
 
+
+        /* =====================================
+           DOCUMENT TITLE
+        ====================================== */
 
         .viewer-title {
 
@@ -178,8 +222,13 @@
             text-overflow: ellipsis;
 
             white-space: nowrap;
+
         }
 
+
+        /* =====================================
+           STATUS
+        ====================================== */
 
         .viewer-status {
 
@@ -192,6 +241,7 @@
             color: #7f92a9;
 
             font-size: 12px;
+
         }
 
 
@@ -208,8 +258,13 @@
             box-shadow:
                 0 0 10px
                 rgba(53,209,138,0.65);
+
         }
 
+
+        /* =====================================
+           PDF AREA
+        ====================================== */
 
         .viewer-content {
 
@@ -220,6 +275,7 @@
             background: #111827;
 
             overflow: hidden;
+
         }
 
 
@@ -234,8 +290,13 @@
             border: none;
 
             background: #111827;
+
         }
 
+
+        /* =====================================
+           LOADING
+        ====================================== */
 
         .viewer-loading {
 
@@ -264,6 +325,7 @@
 
             transition:
                 opacity 0.3s ease;
+
         }
 
 
@@ -284,13 +346,16 @@
 
             animation:
                 spin 0.8s linear infinite;
+
         }
 
 
         @keyframes spin {
 
             to {
+
                 transform: rotate(360deg);
+
             }
 
         }
@@ -299,8 +364,13 @@
         .viewer-loading.hidden {
 
             opacity: 0;
+
         }
 
+
+        /* =====================================
+           MOBILE
+        ====================================== */
 
         @media (max-width: 700px) {
 
@@ -309,6 +379,7 @@
                 height: 60px;
 
                 padding: 0 12px;
+
             }
 
 
@@ -319,30 +390,35 @@
                 padding: 0 11px;
 
                 font-size: 13px;
+
             }
 
 
             .viewer-brand-name {
 
                 font-size: 20px;
+
             }
 
 
             .viewer-brand-crown {
 
                 font-size: 22px;
+
             }
 
 
             .viewer-title {
 
                 display: none;
+
             }
 
 
             .viewer-status {
 
                 font-size: 10px;
+
             }
 
         }
@@ -357,11 +433,14 @@
 <div class="viewer-page">
 
 
-    <!-- HEADER -->
+    <!-- =====================================
+         HEADER
+    ====================================== -->
 
     <header class="viewer-header">
 
         <div class="viewer-left">
+
 
             <button
                 class="back-btn"
@@ -407,9 +486,12 @@
 
 
 
-    <!-- PDF -->
+    <!-- =====================================
+         PDF
+    ====================================== -->
 
     <main class="viewer-content">
+
 
         <div
             class="viewer-loading"
@@ -430,34 +512,25 @@
             title="Gulu PDF Viewer"
         ></iframe>
 
+
     </main>
+
 
 </div>
 
 
 
-<!-- DATA -->
+<!-- =====================================
+     DATA
+====================================== -->
 
-<script src="js/library-data.js"></script>
-
-
-<!-- MAIN SCRIPT -->
-
-<script src="js/script.js"></script>
+<script src="./js/library-data.js"></script>
 
 
 <script>
 
     /* =====================================
-       PROTECT
-    ====================================== */
-
-    protectPage();
-
-
-
-    /* =====================================
-       CLASS
+       SELECTED CLASS
     ====================================== */
 
     const selectedClass =
@@ -478,8 +551,14 @@
         );
 
 
+    /*
+       Make sure the user has selected
+       a valid class and subject.
+    */
+
     if (
         !selectedClass ||
+        typeof LIBRARY_DATA === "undefined" ||
         !LIBRARY_DATA[selectedClass] ||
         !selectedSubject ||
         subjectUnlocked !== "true"
@@ -616,9 +695,8 @@
 
         catch (error) {
 
-            console.log(
-                "Could not read PDF filename."
-            );
+            cleanName =
+                "PDF Document";
 
         }
 
@@ -672,9 +750,12 @@
 </script>
 
 
-<!-- MUSIC -->
 
-<script src="js/bg-music.js"></script>
+<!-- =====================================
+     BACKGROUND MUSIC
+====================================== -->
+
+<script src="./js/bg-music.js"></script>
 
 
 </body>
