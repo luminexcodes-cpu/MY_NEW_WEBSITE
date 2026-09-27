@@ -324,6 +324,27 @@ button {
     box-shadow: 0 20px 36px rgba(10, 86, 180, 0.26);
 }
 
+.page-progress {
+    position: sticky;
+    top: 0;
+    z-index: 120;
+    width: 100%;
+    height: 4px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 999px;
+    margin: 6px auto 0;
+    max-width: 1280px;
+}
+
+#pageProgressBar {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #3cc4ff, #4d8dff, #125ce2);
+    box-shadow: 0 0 18px rgba(77, 141, 255, 0.75);
+    transition: width 0.15s ease-out;
+}
 
 .side-menu-panel {
     position: absolute;
@@ -390,6 +411,48 @@ button {
     transform: translateX(4px);
 }
 
+.side-menu-panel a.active {
+    background: linear-gradient(135deg, rgba(29, 107, 196, 0.28), rgba(35, 82, 164, 0.14));
+    border-color: rgba(116, 195, 255, 0.26);
+    box-shadow: inset 0 0 0 1px rgba(125, 207, 255, 0.16);
+}
+
+#guluToast {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%) translateY(18px);
+    z-index: 200;
+    min-width: 240px;
+    max-width: 420px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    background: rgba(9, 23, 35, 0.96);
+    border: 1px solid rgba(120, 195, 255, 0.28);
+    color: #edf8ff;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+#guluToast.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.soft-reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.7s ease;
+}
+
+.soft-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 .brand {
     display: flex;
