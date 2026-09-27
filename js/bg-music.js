@@ -5,7 +5,7 @@ player.preload = "auto";
 document.body.appendChild(player);
 
 const mySong = "hh.mp3";
-player.volume = 0.45; // 45% Volume (40-50% ke beech)
+player.volume = 2.00; // 45% Volume (40-50% ke beech)
 
 function playMusic() {
     if (!player.src || !player.src.includes(mySong)) {
