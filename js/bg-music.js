@@ -1,77 +1,286 @@
-// 1. Audio Element ko dynamically HTML me add karna
-const player = document.createElement('audio');
-player.id = "bg-player";
-player.preload = "auto";
-document.body.appendChild(player);
+/* =========================================================
+   GULU PDF LIBRARY
+   BACKGROUND MUSIC CONTROLLER
+========================================================= */
 
-const mySong = "hh.mp3";
-player.volume = 1.00; // 45% Volume (40-50% ke beech)
+(function () {
 
-function playMusic() {
-    if (!player.src || !player.src.includes(mySong)) {
-        player.src = mySong;
+    "use strict";
 
-        // 🌟 localStorage ki jagah sessionStorage use kar rahe hain
-        const savedTime = sessionStorage.getItem("bgTrackTime");
-        const isWaiting = sessionStorage.getItem("bgTrackWaiting");
 
-        // Agar gaana abhi 5 min wale break me hai, toh play nahi hoga
-        if (isWaiting === "true") {
-            return; 
-        }
+    /* =====================================================
+       SETTINGS
+    ===================================================== */
 
-        if (savedTime) {
-            player.addEventListener("loadedmetadata", function () {
-                try {
-                    player.currentTime = parseFloat(savedTime);
-                } catch (error) {
-                    console.log("Could not restore music time.");
-                }
-            }, { once: true });
-        }
+    const MUSIC_ID =
+        "bgMusic";
+
+
+    const STORAGE_KEY =
+        "guluMusicEnabled";
+
+
+    const volume =
+        0.22;
+
+
+
+    /* =====================================================
+       FIND AUDIO
+    ===================================================== */
+
+    function getMusic() {
+
+        return document.getElementById(
+            MUSIC_ID
+        );
+
     }
 
-    // Gaana play karne ki koshish
-    player.play().catch((error) => {
-        console.log("Autoplay blocked. User action needed to play.");
-    });
-}
 
-// Har second current play time ko save karein
-player.addEventListener("timeupdate", function () {
-    sessionStorage.setItem("bgTrackTime", player.currentTime);
-});
 
-// Gaana khatam hone par 5 minute ka wait karega
-player.addEventListener("ended", function() {
-    console.log("Gaana khatam! Ab 5 minute ka break...");
-    
-    sessionStorage.removeItem("bgTrackTime"); 
-    sessionStorage.setItem("bgTrackWaiting", "true"); // Break status save kiya
-    
-    // 5 minute ka loop timer
-    setTimeout(function() {
-        console.log("5 minute poore hue! Gaana fir se shuru ho raha hai.");
-        sessionStorage.removeItem("bgTrackWaiting");
-        player.currentTime = 0;
-        playMusic();
-    }, 300000); 
-});
+    /* =====================================================
+       APPLY SETTINGS
+    ===================================================== */
 
-// Page load hote hi music start karne ki koshish karein
-window.addEventListener("DOMContentLoaded", () => {
-    if (sessionStorage.getItem("bgTrackWaiting") !== "true") {
-        playMusic();
-    }
-});
+    function applyMusicSettings() {
 
-// Browsers ki restriction bypass karne ke liye (Click, Scroll, Touch ya Keydown par music chalu)
-const startInteractions = ["click", "scroll", "touchstart", "keydown", "mousemove"];
-startInteractions.forEach(event => {
-    window.addEventListener(event, function handleInteraction() {
-        if (player.paused && sessionStorage.getItem("bgTrackWaiting") !== "true") {
-            playMusic();
+        const music =
+            getMusic();
+
+
+        if (!music) {
+
+            return;
+
         }
-        window.removeEventListener(event, handleInteraction);
-    });
-});
+
+
+        music.volume =
+            volume;
+
+        music.loop =
+            true;
+
+
+        const saved =
+            localStorage.getItem(
+                STORAGE_KEY
+            );
+
+
+        if (saved === "false") {
+
+            music.muted =
+                true;
+
+        }
+
+        else {
+
+            music.muted =
+                false;
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       START MUSIC
+    ===================================================== */
+
+    async function startMusic() {
+
+        const music =
+            getMusic();
+
+
+        if (!music) {
+
+            return;
+
+        }
+
+
+        applyMusicSettings();
+
+
+        try {
+
+            await music.play();
+
+        }
+
+        catch (error) {
+
+            /*
+               Browser autoplay policies may block
+               audio until the user interacts.
+            */
+
+            console.log(
+                "Music waiting for user interaction."
+            );
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       FIRST USER INTERACTION
+    ===================================================== */
+
+    function enableAfterInteraction() {
+
+        const music =
+            getMusic();
+
+
+        if (!music) {
+
+            return;
+
+        }
+
+
+        startMusic();
+
+        document.removeEventListener(
+            "click",
+            enableAfterInteraction
+        );
+
+        document.removeEventListener(
+            "touchstart",
+            enableAfterInteraction
+        );
+
+        document.removeEventListener(
+            "keydown",
+            enableAfterInteraction
+        );
+
+    }
+
+
+
+    /* =====================================================
+       PUBLIC TOGGLE
+    ===================================================== */
+
+    window.toggleGuluMusic =
+        function () {
+
+            const music =
+                getMusic();
+
+
+            if (!music) {
+
+                return;
+
+            }
+
+
+            const currentlyMuted =
+                music.muted;
+
+
+            music.muted =
+                !currentlyMuted;
+
+
+            localStorage.setItem(
+                STORAGE_KEY,
+                String(!music.muted)
+            );
+
+
+            if (!music.muted) {
+
+                startMusic();
+
+            }
+
+        };
+
+
+
+    /* =====================================================
+       INITIALIZE
+    ===================================================== */
+
+    function initializeMusic() {
+
+        const music =
+            getMusic();
+
+
+        if (!music) {
+
+            return;
+
+        }
+
+
+        applyMusicSettings();
+
+
+        startMusic();
+
+
+        document.addEventListener(
+            "click",
+            enableAfterInteraction,
+            {
+                once: false,
+                passive: true
+            }
+        );
+
+
+        document.addEventListener(
+            "touchstart",
+            enableAfterInteraction,
+            {
+                once: false,
+                passive: true
+            }
+        );
+
+
+        document.addEventListener(
+            "keydown",
+            enableAfterInteraction,
+            {
+                once: false,
+                passive: true
+            }
+        );
+
+    }
+
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            initializeMusic
+        );
+
+    }
+
+    else {
+
+        initializeMusic();
+
+    }
+
+})();

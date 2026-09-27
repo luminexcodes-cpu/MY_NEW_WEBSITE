@@ -1,176 +1,268 @@
-// ========================================
-// GULU SECURE PDF LIBRARY
-// LOGIN / SESSION SYSTEM
-// ========================================
-
-const loginForm =
-    document.getElementById("loginForm");
-
-const message =
-    document.getElementById("message");
+/* =========================================================
+   GULU PDF LIBRARY
+   FINAL SCRIPT
+   Login system removed
+========================================================= */
 
 
-// ========================================
-// LOGIN DETAILS
-// ========================================
+/* =========================================================
+   SESSION HELPERS
+========================================================= */
 
-const CORRECT_USERNAME = "GULU";
-const CORRECT_PASSWORD = "5152";
+function clearLibrarySession() {
 
+    sessionStorage.removeItem("selectedClass");
 
-// ========================================
-// LOGIN FORM
-// ========================================
+    sessionStorage.removeItem("selectedSubject");
 
-if (loginForm) {
+    sessionStorage.removeItem("subjectUnlocked");
 
-    loginForm.addEventListener(
-        "submit",
-        function (event) {
-
-            event.preventDefault();
+}
 
 
-            const username =
-                document
-                    .getElementById("username")
-                    .value
-                    .trim();
+/* =========================================================
+   GO TO CLASS SELECTION
+========================================================= */
 
+function goToClasses() {
 
-            const password =
-                document
-                    .getElementById("password")
-                    .value;
-
-
-            if (message) {
-                message.textContent = "";
-            }
-
-
-            if (
-                username === CORRECT_USERNAME &&
-                password === CORRECT_PASSWORD
-            ) {
-
-                // Login session
-                sessionStorage.setItem(
-                    "loggedIn",
-                    "true"
-                );
-
-
-                sessionStorage.setItem(
-                    "loginTime",
-                    Date.now().toString()
-                );
-
-
-                // Clear old selections
-                sessionStorage.removeItem(
-                    "selectedClass"
-                );
-
-                sessionStorage.removeItem(
-                    "selectedSubject"
-                );
-
-                sessionStorage.removeItem(
-                    "subjectUnlocked"
-                );
-
-
-                // Go to class selection
-                window.location.replace(
-                    "classes.html"
-                );
-
-            }
-
-            else {
-
-                if (message) {
-
-                    message.textContent =
-                        "Invalid username or password.";
-
-                }
-
-
-                document.getElementById(
-                    "password"
-                ).value = "";
-
-
-                document.getElementById(
-                    "username"
-                ).focus();
-
-            }
-
-        }
+    window.location.replace(
+        "classes.html"
     );
 
 }
 
 
-// ========================================
-// PROTECT PAGE
-// ========================================
+/* =========================================================
+   GO TO SUBJECT LIBRARY
+========================================================= */
 
-function protectPage() {
+function goToLibrary() {
 
-    const loggedIn =
+    window.location.replace(
+        "library.html"
+    );
+
+}
+
+
+/* =========================================================
+   SAFE CLASS CHECK
+========================================================= */
+
+function getSelectedClass() {
+
+    const selectedClass =
         sessionStorage.getItem(
-            "loggedIn"
+            "selectedClass"
         );
 
+    if (
+        !selectedClass ||
+        typeof LIBRARY_DATA === "undefined" ||
+        !LIBRARY_DATA[selectedClass]
+    ) {
 
-    if (loggedIn !== "true") {
-
-        window.location.replace(
-            "index.html"
-        );
+        return null;
 
     }
 
+    return selectedClass;
+
 }
 
 
-// ========================================
-// LOGOUT
-// ========================================
+/* =========================================================
+   SAFE SUBJECT CHECK
+========================================================= */
 
-function logoutUser() {
+function getSelectedSubject() {
 
-    sessionStorage.removeItem(
-        "loggedIn"
+    const selectedClass =
+        getSelectedClass();
+
+
+    if (!selectedClass) {
+
+        return null;
+
+    }
+
+
+    const selectedSubject =
+        sessionStorage.getItem(
+            "selectedSubject"
+        );
+
+
+    const currentClass =
+        LIBRARY_DATA[selectedClass];
+
+
+    if (
+        !selectedSubject ||
+        !currentClass.subjects[selectedSubject]
+    ) {
+
+        return null;
+
+    }
+
+
+    return selectedSubject;
+
+}
+
+
+/* =========================================================
+   SUBJECT ACCESS CHECK
+========================================================= */
+
+function isSubjectUnlocked() {
+
+    return (
+        sessionStorage.getItem(
+            "subjectUnlocked"
+        ) === "true"
     );
 
-
-    sessionStorage.removeItem(
-        "loginTime"
-    );
+}
 
 
-    sessionStorage.removeItem(
-        "selectedClass"
-    );
+/* =========================================================
+   OPTIONAL PAGE PROTECTION
+   Used only when another page needs it.
+========================================================= */
+
+function protectLibraryPage() {
+
+    const selectedClass =
+        getSelectedClass();
 
 
-    sessionStorage.removeItem(
-        "selectedSubject"
-    );
+    if (!selectedClass) {
+
+        clearLibrarySession();
+
+        goToClasses();
+
+        return false;
+
+    }
 
 
-    sessionStorage.removeItem(
-        "subjectUnlocked"
-    );
+    return true;
 
+}
+
+
+/* =========================================================
+   PROTECT SUBJECT PAGE
+========================================================= */
+
+function protectSubjectPage(
+    subjectKey
+) {
+
+    const selectedClass =
+        getSelectedClass();
+
+
+    const selectedSubject =
+        getSelectedSubject();
+
+
+    if (
+        !selectedClass ||
+        !selectedSubject ||
+        selectedSubject !== subjectKey ||
+        !isSubjectUnlocked()
+    ) {
+
+        goToLibrary();
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+/* =========================================================
+   PROTECT VIEWER PAGE
+========================================================= */
+
+function protectViewerPage() {
+
+    const selectedClass =
+        getSelectedClass();
+
+
+    const selectedSubject =
+        getSelectedSubject();
+
+
+    if (
+        !selectedClass ||
+        !selectedSubject ||
+        !isSubjectUnlocked()
+    ) {
+
+        clearLibrarySession();
+
+        goToClasses();
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+/* =========================================================
+   BACK TO CLASSES
+========================================================= */
+
+function backToClasses() {
+
+    clearLibrarySession();
+
+    goToClasses();
+
+}
+
+
+/* =========================================================
+   BACK TO SUBJECTS
+========================================================= */
+
+function backToSubjects() {
 
     window.location.replace(
-        "index.html"
+        "library.html"
     );
 
 }
+
+
+/* =========================================================
+   GLOBAL ERROR HANDLER
+========================================================= */
+
+window.addEventListener(
+    "error",
+    function (event) {
+
+        console.error(
+            "Gulu Library Error:",
+            event.error || event.message
+        );
+
+    }
+);
