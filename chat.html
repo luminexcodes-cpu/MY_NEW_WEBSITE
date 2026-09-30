@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gulu Chat</title>
+    <style>
+        :root {
+            --bg: #07111f;
+            --bg-soft: #0d1b2a;
+            --panel: rgba(11, 19, 32, 0.9);
+            --panel-2: rgba(13, 27, 42, 0.95);
+            --card: rgba(17, 27, 40, 0.9);
+            --line: rgba(148, 163, 184, 0.18);
+            --text: #e5eefb;
+            --muted: #a7b6cf;
+            --primary: #7dd3fc;
+            --primary-2: #38bdf8;
+            --green: #34d399;
+            --danger: #f87171;
+            --gold: #f8d76d;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            min-height: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 28%),
+                radial-gradient(circle at right center, rgba(125, 211, 252, 0.14), transparent 30%),
+                linear-gradient(135deg, #020812 0%, #091827 35%, #020b16 100%);
+            color: var(--text);
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 18px;
+        }
+
+        .chat-shell {
+            width: min(1100px, 100%);
+            min-height: 760px;
+            background: rgba(6, 16, 28, 0.82);
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 20px 28px;
+            border-bottom: 1px solid var(--line);
+            background: rgba(8, 18, 30, 0.8);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .brand-mark {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--gold), #f59e0b);
+            color: #111827;
+            box-shadow: 0 10px 20px rgba(245, 158, 11, 0.3);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link,
+        .mini-btn {
+            border: 1px solid var(--line);
+            background: rgba(148, 163, 184, 0.06);
+            color: var(--text);
+            padding: 10px 14px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .nav-link:hover,
+        .mini-btn:hover,
+        .action-btn:hover {
+            transform: translateY(-1px);
+            border-color: rgba(125, 211, 252, 0.45);
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 320px minmax(0, 1fr);
+            min-height: 700px;
+        }
+
+        .sidebar {
+            background: rgba(11, 20, 31, 0.76);
+            border-right: 1px solid var(--line);
+            padding: 24px 18px;
+        }
+
+        .panel-title {
+            font-size: 13px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 18px;
+        }
+
+        .group-card {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(15, 118, 110, 0.12));
+            border: 1px solid rgba(125, 211, 252, 0.25);
+            border-radius: 18px;
+            padding: 18px 16px;
+            margin-bottom: 22px;
+        }
+
+        .group-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 20px;
+        }
+
+        .meta {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .online-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: rgba(52, 211, 153, 0.1);
+            color: var(--green);
+            border: 1px solid rgba(52, 211, 153, 0.25);
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 12px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 12px rgba(52, 211, 153, 0.9);
+        }
+
+        .member-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .member {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: rgba(148, 163, 184, 0.04);
+            border: 1px solid rgba(148, 163, 184, 0.08);
+            border-radius: 12px;
+            padding: 10px 12px;
+            color: var(--muted);
+        }
+
+        .member strong {
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .member span {
+            font-size: 12px;
+        }
+
+        .chat-panel {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background: rgba(7, 18, 28, 0.82);
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 22px 24px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .chat-header h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--primary), #2563eb);
+            color: #02131d;
+            font-weight: 700;
+        }
+
+        .messages {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+            background: linear-gradient(180deg, rgba(8, 17, 28, 0.78), rgba(9, 20, 31, 0.9));
+        }
+
+        .message-row {
+            display: flex;
+            margin-bottom: 16px;
+        }
+
+        .message-row.me {
+            justify-content: flex-end;
+        }
+
+        .bubble {
+            max-width: 68%;
+            background: rgba(148, 163, 184, 0.08);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 18px 18px 18px 6px;
+            padding: 12px 14px;
+        }
+
+        .message-row.me .bubble {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.22), rgba(14, 116, 144, 0.22));
+            border-color: rgba(125, 211, 252, 0.35);
+            border-radius: 18px 18px 6px 18px;
+        }
+
+        .bubble-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 6px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .bubble-name {
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .bubble p {
+            margin: 0;
+            line-height: 1.55;
+            font-size: 15px;
+            color: var(--text);
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .composer {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 24px 24px;
+            border-top: 1px solid var(--line);
+            background: rgba(7, 17, 27, 0.84);
+        }
+
+        .composer input {
+            flex: 1;
+            min-width: 0;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            color: var(--text);
+            padding: 14px 16px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .composer input:focus {
+            border-color: rgba(125, 211, 252, 0.7);
+            box-shadow: 0 0 0 3px rgba(125, 211, 252, 0.18);
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-2));
+            color: #041019;
+            border: none;
+            border-radius: 14px;
+            padding: 13px 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .auth-wrap {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 700px;
+            padding: 24px;
+            background: linear-gradient(180deg, rgba(6, 13, 22, 0.75), rgba(7, 18, 28, 0.86));
+        }
+
+        .auth-box {
+            width: min(520px, 100%);
+            background: rgba(11, 20, 31, 0.9);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+        }
+
+        .auth-box h1 {
+            margin: 0 0 8px 0;
+            font-size: clamp(28px, 4vw, 40px);
+        }
+
+        .auth-box p {
+            color: var(--muted);
+            line-height: 1.7;
+            margin: 0 0 26px 0;
+        }
+
+        .google-btn,
+        .submit-btn,
+        .secondary-btn {
+            width: 100%;
+            border: none;
+            border-radius: 14px;
+            padding: 14px 18px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .google-btn {
+            background: #ffffff;
+            color: #0f172a;
+            margin-bottom: 16px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-2));
+            color: #041019;
+            margin-top: 12px;
+        }
+
+        .secondary-btn {
+            background: rgba(148, 163, 184, 0.08);
+            border: 1px solid var(--line);
+            color: var(--text);
+            margin-top: 8px;
+        }
+
+        form {
+            display: grid;
+            gap: 14px;
+        }
+
+        label {
+            display: grid;
+            gap: 8px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        input {
+            width: 100%;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.86);
+            color: var(--text);
+            padding: 12px 14px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: rgba(125, 211, 252, 0.8);
+            box-shadow: 0 0 0 3px rgba(125, 211, 252, 0.15);
+        }
+
+        .or-divider {
+            position: relative;
+            text-align: center;
+            color: var(--muted);
+            font-size: 12px;
+            margin: 8px 0 10px;
+        }
+
+        .or-divider::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            border-top: 1px solid var(--line);
+            z-index: 0;
+        }
+
+        .or-divider span {
+            display: inline-block;
+            position: relative;
+            background: rgba(11, 20, 31, 0.9);
+            padding: 0 12px;
+            z-index: 1;
+        }
+
+        .status {
+            min-height: 20px;
+            font-size: 13px;
+            color: var(--danger);
+            margin-top: 10px;
+        }
+
+        @media (max-width: 840px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                border-right: none;
+                border-bottom: 1px solid var(--line);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-shell">
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-mark">♕</div>
+                <div>Gulu Chat</div>
+            </div>
+
+            <div class="nav-actions">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <button class="mini-btn" id="logoutBtn" type="button">Logout</button>
+            </div>
+        </header>
+
+        <div class="content">
+            <aside class="sidebar">
+                <div class="panel-title">Study Group</div>
+
+                <div class="group-card">
+                    <h3>GSEB Community</h3>
+                    <div class="meta">Share notes, ask doubts, discuss subjects and study updates with the group.</div>
+                    <div class="online-chip"><span class="dot"></span> <span id="onlineCount">0 online</span></div>
+                </div>
+
+                <div class="panel-title">Members</div>
+                <div class="member-list" id="memberList"></div>
+            </aside>
+
+            <main class="chat-panel" id="chatPanel">
+                <div class="chat-header">
+                    <h2>Group Chat</h2>
+                    <div class="header-user">
+                        <div class="avatar" id="headerAvatar">U</div>
+                        <span id="headerUser">Guest</span>
+                    </div>
+                </div>
+
+                <div class="messages" id="messages"></div>
+
+                <div class="composer">
+                    <input id="messageInput" type="text" maxlength="400" placeholder="Type your message..." />
+                    <button class="action-btn" id="sendBtn" type="button">Send</button>
+                </div>
+            </main>
+        </div>
+
+        <div class="auth-wrap" id="authWrap">
+            <div class="auth-box">
+                <h1>Login to Chat</h1>
+                <p>First continue with Google, then create your User ID and password to join the study group.</p>
+
+                <button class="google-btn" type="button" id="googleBtn">Continue with Google</button>
+
+                <div class="or-divider"><span>or</span></div>
+
+                <form id="authForm">
+                    <label>
+                        Google email
+                        <input id="googleEmail" type="email" placeholder="yourname@gmail.com" required />
+                    </label>
+
+                    <label>
+                        Create User ID
+                        <input id="userId" type="text" placeholder="Enter unique user ID" required />
+                    </label>
+
+                    <label>
+                        Create Password
+                        <input id="password" type="password" placeholder="Enter password" required />
+                    </label>
+
+                    <label>
+                        Confirm Password
+                        <input id="confirmPassword" type="password" placeholder="Confirm password" required />
+                    </label>
+
+                    <button class="submit-btn" id="authSubmitBtn" type="submit">Create account & enter chat</button>
+                </form>
+
+                <button class="secondary-btn" id="switchLoginBtn" type="button">Already have an account? Login</button>
+                <div class="status" id="authStatus"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script>
+        (function () {
+            const firebaseConfig = {
+                apiKey: "YOUR_API_KEY",
+                authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+                projectId: "YOUR_PROJECT_ID",
+                storageBucket: "YOUR_PROJECT_ID.appspot.com",
+                messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+                appId: "YOUR_APP_ID"
+            };
+
+            const CHAT_COLLECTION = 'gulu_group_messages';
+            const USER_COLLECTION = 'gulu_group_users';
+
+            const chatPanel = document.getElementById('chatPanel');
+            const authWrap = document.getElementById('authWrap');
+            const authStatus = document.getElementById('authStatus');
+            const authForm = document.getElementById('authForm');
+            const googleBtn = document.getElementById('googleBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const memberList = document.getElementById('memberList');
+            const onlineCount = document.getElementById('onlineCount');
+            const messagesContainer = document.getElementById('messages');
+            const messageInput = document.getElementById('messageInput');
+            const sendBtn = document.getElementById('sendBtn');
+            const headerUser = document.getElementById('headerUser');
+            const headerAvatar = document.getElementById('headerAvatar');
+            const switchLoginBtn = document.getElementById('switchLoginBtn');
+            const authSubmitBtn = document.getElementById('authSubmitBtn');
+
+            let currentUser = null;
+            let firestoreDb = null;
+            let isLoginMode = false;
+
+            function setAuthStatus(message, isError) {
+                authStatus.textContent = message || '';
+                authStatus.style.color = isError ? '#f87171' : '#34d399';
+            }
+
+            function showAuth() {
+                chatPanel.style.display = 'none';
+                authWrap.style.display = 'flex';
+            }
+
+            function showChat() {
+                chatPanel.style.display = 'flex';
+                authWrap.style.display = 'none';
+            }
+
+            function normalizeUserId(value) {
+                return String(value || '').trim();
+            }
+
+            function escapeHtml(value) {
+                return String(value)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            }
+
+            function isFirebaseReady() {
+                return firebase && firebase.apps && firebase.apps.length > 0 && firebase.firestore;
+            }
+
+            function ensureFirebase() {
+                if (!isFirebaseReady()) {
+                    firebase.initializeApp(firebaseConfig);
+                }
+                firestoreDb = firebase.firestore();
+            }
+
+            function checkConfig() {
+                const hasPlaceholder = firebaseConfig.apiKey.includes('YOUR_') || firebaseConfig.projectId.includes('YOUR_');
+                if (hasPlaceholder) {
+                    setAuthStatus('Firebase config missing. Add your Firebase project keys in chat.html before using chat.', true);
+                    return false;
+                }
+                return true;
+            }
+
+            async function renderMessages() {
+                if (!firestoreDb) {
+                    return;
+                }
+
+                try {
+                    const snapshot = await firestoreDb.collection(CHAT_COLLECTION)
+                        .orderBy('createdAt', 'asc')
+                        .limit(200)
+                        .get();
+
+                    const messages = snapshot.docs.map(function (doc) {
+                        return doc.data();
+                    });
+
+                    messagesContainer.innerHTML = '';
+
+                    if (!messages.length) {
+                        const empty = document.createElement('div');
+                        empty.className = 'bubble';
+                        empty.innerHTML = '<p>Welcome to the GSEB Community group. Start the conversation.</p>';
+                        messagesContainer.appendChild(empty);
+                        return;
+                    }
+
+                    messages.forEach(function (message) {
+                        const row = document.createElement('div');
+                        const sender = message.userId || 'Guest';
+                        const isMine = currentUser && currentUser.userId && currentUser.userId === sender;
+                        row.className = 'message-row' + (isMine ? ' me' : '');
+
+                        const bubble = document.createElement('div');
+                        bubble.className = 'bubble';
+                        bubble.innerHTML = '<div class="bubble-header"><span class="bubble-name">' + escapeHtml(sender) + '</span><span>' + (message.createdAt && message.createdAt.toDate ? message.createdAt.toDate().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '') + '</span></div><p>' + escapeHtml(message.text || '') + '</p>';
+                        row.appendChild(bubble);
+                        messagesContainer.appendChild(row);
+                    });
+
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                } catch (error) {
+                    console.error('Error loading messages:', error);
+                }
+            }
+
+            async function renderMembers() {
+                if (!firestoreDb) {
+                    return;
+                }
+
+                try {
+                    const snapshot = await firestoreDb.collection(USER_COLLECTION).get();
+                    const users = snapshot.docs.map(function (doc) {
+                        return doc.data().userId;
+                    });
+
+                    memberList.innerHTML = '';
+                    if (!users.length) {
+                        memberList.innerHTML = '<div class="member"><strong>No users yet</strong><span>Be the first</span></div>';
+                        onlineCount.textContent = '0 online';
+                        return;
+                    }
+
+                    users.slice(0, 10).forEach(function (userId) {
+                        const row = document.createElement('div');
+                        row.className = 'member';
+                        row.innerHTML = '<strong>' + escapeHtml(userId) + '</strong><span>online</span>';
+                        memberList.appendChild(row);
+                    });
+
+                    onlineCount.textContent = users.length + ' online';
+                } catch (error) {
+                    console.error('Error loading members:', error);
+                }
+            }
+
+            async function saveUserProfile(userId, email) {
+                if (!firestoreDb) {
+                    return;
+                }
+
+                await firestoreDb.collection(USER_COLLECTION).doc(userId).set({
+                    userId: userId,
+                    email: email,
+                    lastSeen: new Date()
+                }, { merge: true });
+            }
+
+            async function signUpAccount(event) {
+                event.preventDefault();
+                if (!checkConfig()) return;
+
+                const email = document.getElementById('googleEmail').value.trim();
+                const userId = normalizeUserId(document.getElementById('userId').value);
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+
+                if (!email || !userId || !password || !confirmPassword) {
+                    setAuthStatus('Google email, User ID and password are required.', true);
+                    return;
+                }
+
+                if (password.length < 6) {
+                    setAuthStatus('Password must be at least 6 characters.', true);
+                    return;
+                }
+
+                if (password !== confirmPassword) {
+                    setAuthStatus('Passwords do not match.', true);
+                    return;
+                }
+
+                try {
+                    const auth = firebase.auth();
+                    const existing = await firebase.firestore().collection(USER_COLLECTION).doc(userId).get();
+                    if (existing.exists) {
+                        setAuthStatus('This User ID is already taken. Choose another one.', true);
+                        return;
+                    }
+
+                    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                    await userCredential.user.updateProfile({ displayName: userId });
+                    await saveUserProfile(userId, email);
+
+                    currentUser = { userId: userId, email: email, uid: userCredential.user.uid };
+                    headerUser.textContent = userId;
+                    headerAvatar.textContent = userId.charAt(0).toUpperCase();
+                    setAuthStatus('Account created successfully.', false);
+                    authForm.reset();
+                    showChat();
+                    renderMembers();
+                    renderMessages();
+                } catch (error) {
+                    console.error('Sign up error:', error);
+                    setAuthStatus(error.message || 'Unable to create account.', true);
+                }
+            }
+
+            async function loginUser(event) {
+                event.preventDefault();
+                if (!checkConfig()) return;
+
+                const email = document.getElementById('googleEmail').value.trim();
+                const userId = normalizeUserId(document.getElementById('userId').value);
+                const password = document.getElementById('password').value;
+
+                if (!email || !userId || !password) {
+                    setAuthStatus('Google email, User ID and password are required to sign in.', true);
+                    return;
+                }
+
+                try {
+                    const auth = firebase.auth();
+                    const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                    const user = userCredential.user;
+                    const profileName = (user.displayName || userId || '').trim();
+
+                    if (profileName && profileName !== userId) {
+                        setAuthStatus('This account is linked to a different user ID. Please use the correct login.', true);
+                        await auth.signOut();
+                        return;
+                    }
+
+                    currentUser = { userId: userId, email: email, uid: user.uid };
+                    headerUser.textContent = userId;
+                    headerAvatar.textContent = userId.charAt(0).toUpperCase();
+                    await saveUserProfile(userId, email);
+                    authForm.reset();
+                    showChat();
+                    renderMembers();
+                    renderMessages();
+                } catch (error) {
+                    console.error('Login error:', error);
+                    setAuthStatus(error.message || 'Invalid email or password.', true);
+                }
+            }
+
+            async function openGoogleSignIn() {
+                if (!checkConfig()) return;
+
+                try {
+                    const provider = new firebase.auth.GoogleAuthProvider();
+                    const result = await firebase.auth().signInWithPopup(provider);
+                    const user = result.user;
+                    const userId = normalizeUserId(user.displayName || user.email.split('@')[0]);
+                    const email = user.email;
+
+                    if (!userId) {
+                        setAuthStatus('Google account did not return a valid name.', true);
+                        return;
+                    }
+
+                    await saveUserProfile(userId, email);
+                    currentUser = { userId: userId, email: email, uid: user.uid };
+                    headerUser.textContent = userId;
+                    headerAvatar.textContent = userId.charAt(0).toUpperCase();
+                    document.getElementById('googleEmail').value = email;
+                    document.getElementById('userId').value = userId;
+                    showChat();
+                    renderMembers();
+                    renderMessages();
+                } catch (error) {
+                    console.error('Google sign in failed:', error);
+                    setAuthStatus(error.message || 'Google sign-in failed.', true);
+                }
+            }
+
+            function handleFormSubmit(event) {
+                event.preventDefault();
+                if (isLoginMode) {
+                    loginUser(event);
+                } else {
+                    signUpAccount(event);
+                }
+            }
+
+            function toggleLoginMode() {
+                isLoginMode = !isLoginMode;
+                const title = isLoginMode ? 'Welcome back' : 'Create account';
+                document.querySelector('.auth-box h1').textContent = title;
+                switchLoginBtn.textContent = isLoginMode ? 'Need a new account? Sign up' : 'Already have an account? Login';
+                authSubmitBtn.textContent = isLoginMode ? 'Login & enter chat' : 'Create account & enter chat';
+                setAuthStatus('', false);
+                authForm.reset();
+            }
+
+            async function sendMessage() {
+                if (!firestoreDb || !currentUser) {
+                    return;
+                }
+
+                const value = messageInput.value.trim();
+                if (!value) {
+                    return;
+                }
+
+                try {
+                    await firestoreDb.collection(CHAT_COLLECTION).add({
+                        userId: currentUser.userId,
+                        text: value,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+
+                    messageInput.value = '';
+                } catch (error) {
+                    console.error('Send message error:', error);
+                }
+            }
+
+            function attachRealtimeListeners() {
+                if (!firestoreDb) {
+                    return;
+                }
+
+                firestoreDb.collection(CHAT_COLLECTION)
+                    .orderBy('createdAt', 'asc')
+                    .onSnapshot(function (snapshot) {
+                        const messages = snapshot.docs.map(function (doc) {
+                            return doc.data();
+                        });
+
+                        messagesContainer.innerHTML = '';
+                        if (!messages.length) {
+                            const empty = document.createElement('div');
+                            empty.className = 'bubble';
+                            empty.innerHTML = '<p>Welcome to the GSEB Community group. Start the conversation.</p>';
+                            messagesContainer.appendChild(empty);
+                            return;
+                        }
+
+                        messages.forEach(function (message) {
+                            const row = document.createElement('div');
+                            const sender = message.userId || 'Guest';
+                            const isMine = currentUser && currentUser.userId && currentUser.userId === sender;
+                            row.className = 'message-row' + (isMine ? ' me' : '');
+
+                            const bubble = document.createElement('div');
+                            bubble.className = 'bubble';
+                            const time = message.createdAt && message.createdAt.toDate ? message.createdAt.toDate().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Now';
+                            bubble.innerHTML = '<div class="bubble-header"><span class="bubble-name">' + escapeHtml(sender) + '</span><span>' + time + '</span></div><p>' + escapeHtml(message.text || '') + '</p>';
+                            row.appendChild(bubble);
+                            messagesContainer.appendChild(row);
+                        });
+
+                        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                    });
+
+                firestoreDb.collection(USER_COLLECTION)
+                    .onSnapshot(function (snapshot) {
+                        const users = snapshot.docs.map(function (doc) {
+                            return doc.data().userId;
+                        });
+
+                        memberList.innerHTML = '';
+                        if (!users.length) {
+                            memberList.innerHTML = '<div class="member"><strong>No users yet</strong><span>Be the first</span></div>';
+                            onlineCount.textContent = '0 online';
+                            return;
+                        }
+
+                        users.slice(0, 10).forEach(function (userId) {
+                            const row = document.createElement('div');
+                            row.className = 'member';
+                            row.innerHTML = '<strong>' + escapeHtml(userId) + '</strong><span>online</span>';
+                            memberList.appendChild(row);
+                        });
+
+                        onlineCount.textContent = users.length + ' online';
+                    });
+            }
+
+            function initialize() {
+                ensureFirebase();
+
+                if (!checkConfig()) {
+                    showAuth();
+                    return;
+                }
+
+                const auth = firebase.auth();
+                auth.onAuthStateChanged(function (user) {
+                    if (user) {
+                        const displayName = normalizeUserId(user.displayName || (user.email ? user.email.split('@')[0] : 'User'));
+                        currentUser = { userId: displayName, email: user.email, uid: user.uid };
+                        headerUser.textContent = displayName;
+                        headerAvatar.textContent = displayName.charAt(0).toUpperCase();
+                        saveUserProfile(displayName, user.email || '');
+                        showChat();
+                        attachRealtimeListeners();
+                    } else {
+                        showAuth();
+                    }
+                });
+
+                googleBtn.addEventListener('click', openGoogleSignIn);
+                authForm.addEventListener('submit', handleFormSubmit);
+                sendBtn.addEventListener('click', sendMessage);
+                messageInput.addEventListener('keydown', function (event) {
+                    if (event.key === 'Enter') {
+                        sendMessage();
+                    }
+                });
+                logoutBtn.addEventListener('click', function () {
+                    firebase.auth().signOut().then(function () {
+                        currentUser = null;
+                        authForm.reset();
+                        setAuthStatus('You have been logged out.', false);
+                        showAuth();
+                    }).catch(function (error) {
+                        console.error(error);
+                    });
+                });
+                switchLoginBtn.addEventListener('click', toggleLoginMode);
+                renderMembers();
+            }
+
+            initialize();
+        })();
+    </script>
+</body>
+</html>

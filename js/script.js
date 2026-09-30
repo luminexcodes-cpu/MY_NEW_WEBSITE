@@ -198,6 +198,140 @@
         window.guluLibrarySession = librarySession;
     }
 
+    function setupLiveUserCounter() {
+        const currentPage = window.location.pathname.split("/").pop() || "index.html";
+        const storageKey = "guluLiveUsers";
+        const clientIdKey = "guluLiveClientId";
+        const activeLimit = 20000;
+
+        let clientId = sessionStorage.getItem(clientIdKey);
+        if (!clientId) {
+            clientId = "gulu-" + Date.now() + "-" + Math.random().toString(16).slice(2, 10);
+            sessionStorage.setItem(clientIdKey, clientId);
+        }
+
+        function getUsers() {
+            try {
+                return JSON.parse(localStorage.getItem(storageKey) || "{}");
+            } catch (error) {
+                return {};
+            }
+        }
+
+        function saveUsers(users) {
+            try {
+                localStorage.setItem(storageKey, JSON.stringify(users));
+            } catch (error) {
+                console.warn("Could not save active user count.", error);
+            }
+        }
+
+        function cleanupStaleUsers() {
+            const users = getUsers();
+            const now = Date.now();
+            const freshUsers = {};
+
+            Object.keys(users).forEach(function (id) {
+                const user = users[id];
+                if (!user) {
+                    return;
+                }
+
+                if (now - user.updatedAt <= activeLimit) {
+                    freshUsers[id] = user;
+                }
+            });
+
+            saveUsers(freshUsers);
+            renderCount();
+        }
+
+        function getPageUsers(users) {
+            const now = Date.now();
+            const pageUsers = {};
+
+            Object.keys(users).forEach(function (id) {
+                const user = users[id];
+                if (!user || user.page !== currentPage) {
+                    return;
+                }
+
+                if (now - user.updatedAt <= activeLimit) {
+                    pageUsers[id] = user;
+                }
+            });
+
+            return pageUsers;
+        }
+
+        function renderCount() {
+            const users = getUsers();
+            const pageUsers = getPageUsers(users);
+            const count = Object.keys(pageUsers).length;
+
+            let badge = document.getElementById("gulu-live-user-counter");
+            if (!badge) {
+                badge = document.createElement("div");
+                badge.id = "gulu-live-user-counter";
+                badge.setAttribute("aria-live", "polite");
+                badge.style.cssText = "position: fixed; top: 18px; right: 20px; z-index: 9999; display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 999px; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(148, 163, 184, 0.35); color: #ffffff; font-family: Arial, sans-serif; font-size: 13px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);";
+                document.body.appendChild(badge);
+            }
+
+            badge.innerHTML = '<span style="width: 10px; height: 10px; border-radius: 50%; background: #2ecc71; box-shadow: 0 0 8px rgba(46, 204, 113, 0.9); display: inline-block;"></span><span>Online Users: <strong id="gulu-live-user-number" style="color: #ffffff; font-weight: 700;">' + count + '</strong></span>';
+        }
+
+        function syncState() {
+            const users = getUsers();
+            users[clientId] = {
+                id: clientId,
+                page: currentPage,
+                updatedAt: Date.now()
+            };
+            saveUsers(users);
+            renderCount();
+        }
+
+        function removeCurrentUser() {
+            const users = getUsers();
+            if (users[clientId]) {
+                delete users[clientId];
+                saveUsers(users);
+            }
+            renderCount();
+        }
+
+        if ("BroadcastChannel" in window) {
+            const channel = new BroadcastChannel("gulu-live-user-sync");
+            channel.onmessage = function () {
+                renderCount();
+            };
+            window.addEventListener("beforeunload", function () {
+                channel.close();
+            });
+        }
+
+        window.addEventListener("storage", function (event) {
+            if (event.key === storageKey) {
+                renderCount();
+            }
+        });
+
+        window.addEventListener("beforeunload", removeCurrentUser);
+        window.addEventListener("pagehide", removeCurrentUser);
+
+        syncState();
+        cleanupStaleUsers();
+
+        window.setInterval(function () {
+            syncState();
+        }, 5000);
+
+        window.setInterval(function () {
+            cleanupStaleUsers();
+        }, 12000);
+    }
+
     function init() {
         setupScrollProgress();
         setupMenu();
@@ -208,6 +342,7 @@
         setupFeatureCards();
         setupPageBadges();
         setupGlobalHelpers();
+        setupLiveUserCounter();
     }
 
     if (document.readyState === "loading") {
