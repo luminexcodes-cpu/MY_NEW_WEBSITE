@@ -791,21 +791,6 @@
 
 <script>
 
-    const sideMenu = document.getElementById("sideMenu");
-    const menuToggle = document.getElementById("menuToggle");
-
-    menuToggle.addEventListener("click", function () {
-        const isOpen = sideMenu.classList.toggle("open");
-        menuToggle.setAttribute("aria-expanded", String(isOpen));
-    });
-
-    document.addEventListener("click", function (event) {
-        if (!sideMenu.contains(event.target)) {
-            sideMenu.classList.remove("open");
-            menuToggle.setAttribute("aria-expanded", "false");
-        }
-    });
-
     document
         .getElementById("enterLibraryBtn")
         .addEventListener(
